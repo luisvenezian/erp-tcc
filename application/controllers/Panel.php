@@ -17,7 +17,8 @@ class Panel extends CI_Controller {
 		else{
 			$user_session = getUserName();
 			$data = $this->bd->getApplicacoes($user_session);
-			$this->load->view('panel', $data);
+			setApplicationsUser($data);
+			$this->load->view('panel');
 		}
 	}
 }

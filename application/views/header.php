@@ -23,7 +23,10 @@
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">
       <img id="mainlogo" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
-      <input class="form-control form-control-dark w-100" type="text" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
+      
+      <input class="form-control form-control-dark w-100" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
+      <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="login\sair">  
@@ -33,6 +36,11 @@
         </li>
       </ul>
     </nav>
+    
+    <datalist id='historico'>
+        <?php echo getHistoryList(); ?>
+    </datalist>
+
 
     <div class="container-fluid">
       <div class="row">
@@ -110,3 +118,6 @@
             </ul>
           </div>
         </nav>
+      
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><br>
+        

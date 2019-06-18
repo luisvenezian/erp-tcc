@@ -46,3 +46,42 @@ if (!function_exists('getUserName')){
 		return $ci->session->userdata('user_login'); 
 	}
 }
+
+/* 
+ * Aplicações do Usuário,
+ * Todas as aplicações que o usuário pode acessar, influencia as pesquisas.
+ */ 
+
+if (!function_exists('setApplicationsUser')){
+	
+	function setApplicationsUser($data=null){
+		$ci = & get_instance();
+		$ci->session->set_userdata('applications',$data);
+	}
+
+}
+
+if (!function_exists('getApplicationsUser')){
+	function getApplicationsUser(){
+		$ci = & get_instance();
+		return $ci->session->userdata('applications');
+	}
+}
+
+/* 
+ * Carrega uma option list com id histórico de buscas.
+ */
+
+if (!function_exists('getHistoryList')){
+	function getHistoryList(){
+		$data = getApplicationsUser(); 
+		$option = ""; 
+		$i = 0;
+	
+		foreach($data as $row){
+			$option .= "\n\t<option value = '". $data[$i]->APP_NAME ."'></option>";
+			$i++;
+		}
+		return $option;
+	}
+}

@@ -73,12 +73,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+/*
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'MYPC',
 	'username' => 'ti_admin',
 	'password' => '@1q1q2w2w',
 	'database' => 'admin',
+	'dbdriver' => 'sqlsrv',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+*/
+
+
+/*
+ * Configurações de acesso no trabalho. Banco de produção.
+ *
+ */ 
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '177.154.134.120',
+	'username' => 'ti_luisfelipe',
+	'password' => '@1q1q2w2w', 
+	'database' => 'hinode',
 	'dbdriver' => 'sqlsrv',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
