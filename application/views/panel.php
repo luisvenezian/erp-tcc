@@ -1,5 +1,6 @@
 <?php 
       // Carrega o painel superior e lateral.
+      $this->
       $this->load->view('header') 
 ?>
 
