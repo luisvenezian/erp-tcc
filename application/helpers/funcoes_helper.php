@@ -48,8 +48,8 @@ if (!function_exists('getUserName')){
 }
 
 /* 
- * Aplicações do Usuário,
- * Todas as aplicações que o usuário pode acessar, influencia as pesquisas.
+ * Aplicaï¿½ï¿½es do Usuï¿½rio,
+ * Todas as aplicaï¿½ï¿½es que o usuï¿½rio pode acessar, influencia as pesquisas.
  */ 
 
 if (!function_exists('setApplicationsUser')){
@@ -69,7 +69,7 @@ if (!function_exists('getApplicationsUser')){
 }
 
 /* 
- * Carrega uma option list com id histórico de buscas.
+ * Carrega uma option list com id histï¿½rico de buscas.
  */
 
 if (!function_exists('getHistoryList')){
@@ -83,5 +83,24 @@ if (!function_exists('getHistoryList')){
 			$i++;
 		}
 		return $option;
+	}
+}
+
+
+/* 
+ * Carregar um item class nav link ou nav link active
+ * para iluminar icone no sidebar do sistema.
+ */ 
+
+if (!function_exists('getNavLinkType')){
+	
+	function getNavLinkType($controller, $param){
+
+		if ($controller == $param)
+			$result = " class='nav-link active' ";	
+		else 
+			$result = " class='nav-link' ";
+
+		return $result;
 	}
 }

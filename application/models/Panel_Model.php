@@ -15,7 +15,7 @@ class Panel_Model extends CI_Model {
 						JOIN [si].[application] AS A ON A.APP_ID = P.APP_ID
 						WHERE P.[user_name] = '".$user."'";
 		$query = $this->db->query($command_sql);
-
+		
 		return $query->result();
 	}
 

@@ -16,16 +16,25 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/aab0d1297c.js"></script>
 
+    <!-- JS Panel -->
+    <script src="application\views\assets\js\panel.js"></script>
     <!-- Estilos customizados para esse template -->
     <link href="application\views\assets\css\panel.css" rel="stylesheet">
+    <!-- Estilos customizados para Footer -->
+    <link rel="stylesheet" href="application\views\assets\css\footer.css">
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">
       <img id="mainlogo" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
-      
-      <input class="form-control form-control-dark w-100" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
-      <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
+     
+    <input name="pesquisador" class="form-control form-control-dark" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
+    <div class="input-group-btn">
+    <a id="disparapesquisa" href="\pesquisa">
+      <button onclick="dispararPesquisa()" class="btn btn-outline-secondary" type="">Pesquisar</button>
+    </a>
+    </div>
+
 
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -48,37 +57,37 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a <?php echo getNavLinkType('panel',$controller);?> href="\panel">
                   <span data-feather="home"></span>
-                  Página Inicial <span class="sr-only">(atual)</span>
+                  Página Inicial <span class="sr-only"></span>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a <?php echo getNavLinkType('pedido',$controller);?> href="\pedido">
                   <span data-feather="file"></span>
                   Pedidos
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a <?php echo getNavLinkType('produto',$controller);?> href="\produto">
                   <span data-feather="shopping-cart"></span>
                   Produtos
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a <?php echo getNavLinkType('cliente',$controller);?> href="\cliente">
                   <span data-feather="users"></span>
                   Clientes
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a <?php echo getNavLinkType('relatorio',$controller);?> href="\relatorio">
                   <span data-feather="bar-chart-2"></span>
                   Relatórios
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a <?php echo getNavLinkType('integracao',$controller);?> href="\integracao">
                   <span data-feather="layers"></span>
                   Integrações
                 </a>
