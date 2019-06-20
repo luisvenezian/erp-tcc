@@ -26,18 +26,21 @@ class Login extends CI_Controller {
 	 * a acessar o sistema.
 	 * 
 	 */ 
-	public function autenticar(){
+	public function autenticar()
+	{
 
 		$dados_do_formulario = $this->input->post(); 
 		
-		if($this->bd->validarUsuario($dados_do_formulario['usuario'])){
+		if($this->bd->validarUsuario($dados_do_formulario['usuario']))
+		{
 			if($this->bd->validarSenhaUsuario($dados_do_formulario['senha']))
 			{
 				$this->session->set_userdata('logged', TRUE);
 				$this->session->set_userdata('user_login',$dados_do_formulario['usuario']);
 				redirect('panel','refresh');
 			}
-			else {
+			else 
+			{
 				set_msg(' <strong>;(</strong> Ocorreu algum problema ao antenticar a senha!');
 				redirect('login','refresh');
 			}
@@ -50,7 +53,8 @@ class Login extends CI_Controller {
 	}
 
 
-	public function sair(){
+	public function sair()
+	{
 		$this->session->unset_userdata('logged');
 		$this->session->unset_userdata('user_login');
 		redirect('login','refresh');

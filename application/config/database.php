@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
-/*
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'MYPC',
@@ -95,13 +95,13 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
-*/
+
 
 
 /*
- * Configurações de acesso no trabalho. Banco de produção.
+ * Configuraï¿½ï¿½es de acesso no trabalho. Banco de produÃ§Ã£o.
  *
- */ 
+
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => '177.154.134.120',
@@ -123,3 +123,4 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+ */ 

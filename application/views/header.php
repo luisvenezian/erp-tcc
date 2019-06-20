@@ -22,11 +22,12 @@
     <link href="application\views\assets\css\panel.css" rel="stylesheet">
     <!-- Estilos customizados para Footer -->
     <link rel="stylesheet" href="application\views\assets\css\footer.css">
+
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="">
-      <img id="mainlogo" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="\panel">
+      <img id="mainlogo" href="" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
      
     <input name="pesquisador" class="form-control form-control-dark" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
     <div class="input-group-btn">
@@ -90,6 +91,12 @@
                 <a <?php echo getNavLinkType('integracao',$controller);?> href="\integracao">
                   <span data-feather="layers"></span>
                   Integrações
+                </a>
+              </li>
+              <li class="nav-item">
+                <a <?php echo getNavLinkType('executarsql',$controller);?> href="\executarsql">
+                  <span data-feather="database"></span>
+                  Executar SQL
                 </a>
               </li>
             </ul>
