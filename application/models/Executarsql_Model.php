@@ -20,31 +20,34 @@ class ExecutarSql_Model extends CI_Model {
 
 		$num_rows = $query->num_rows();
 		
-
-		if ($qtd_registro > 0) {
+		 
+		if ($num_rows > 0) {
 
 		$table  = "<table class ='table  table-striped'><tr>\n";
 		$table .= "<thead class='thead-light'>\n";
 		$table .= "<tr>\n";
-	
+			
 		foreach ($query->list_fields() as $field)
 		{
 			$table .= "<th scope='col'><b>".$field."</b></th>";
 		}
 
-		$table  = "</tr>\n"; 
+		$table .= "</tr>\n"; 
 		$table .= "</tread>\n"; 
 		$table .= "<tbody>\n";
 		
-		/*
-		while($linha = mysqli_fetch_row($tabela)){
+		$result = $query->result_array();
+
+		for ($line = 0 ; $line < $num_rows; $line++) 
+		{	
 			$table .= "<tr>";
-			foreach($linha as $colunas) 
-				echo "<td>$colunas</td>";
-			
-			echo "</tr>\n";
+			foreach ($query->list_fields() as $field)
+			{
+				$table .= "<td>".$result[$line][$field]."</td>";
+			}
+			$table .= "</tr>";
 		}
-		*/
+		
 		$table .= "</tbody>\n";
 		$table .= "</table>\n";
 		}

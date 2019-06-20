@@ -17,11 +17,13 @@ class ExecutarSql extends CI_Controller {
 		}
 		else{
  
-			$dados_do_formulario = $this->input->post('instrucaosql'); 
-			
-			if (isset($dados_do_formulario)) 
+			$dados_do_formulario['instrucaosql'] = $this->input->post('instrucaosql'); 
+
+			if (!is_null($dados_do_formulario['instrucaosql'])) 
 			{
-				$this->load->view('executarsql',$dados_do_formulario);
+				$result_sql['table'] = $this->bd->getHTMLTableBySQL($dados_do_formulario['instrucaosql']);
+				
+				$this->load->view('executarsql',$result_sql);
 			}
 			else 
 			{

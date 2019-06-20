@@ -22,8 +22,9 @@ $this->load->view('header',$data) ?>
         <?php echo form_close(); ?>
 
         <?php 
-        if (isset($dados_do_formulario)) {
-                echo "<h1>".$dados_do_formulario."</h1>";
+        if (isset($table)) {
+                echo "<hr class='my-4'>\n";
+                echo $table;
             }
         ?>
 <?php $this->load->view('footer') ?>
