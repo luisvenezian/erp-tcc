@@ -24,7 +24,7 @@ $this->load->view('header',$data) ?>
                 $saudacao = "Boa noite, ";
         }
 
-        echo $saudacao . $user . ". Bem vindo ao sistema!"
+        echo $saudacao . $user . ". <br>Bem vindo ao sistema!";
         ?>
         
         </h2>

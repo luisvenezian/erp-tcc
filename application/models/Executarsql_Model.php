@@ -15,7 +15,7 @@ class ExecutarSql_Model extends CI_Model {
 	*/ 
 	function getHTMLTableBySQL($command_sql){
 		
-
+		
 		$query = $this->db->query($command_sql);
 
 		$num_rows = $query->num_rows();
@@ -54,4 +54,43 @@ class ExecutarSql_Model extends CI_Model {
 
 		return $table;
 	}
-}
+
+
+
+	/*
+	 * Função valida se a instrução SQL solicitada pelo usuário
+	 * é permitida. 
+	 */
+
+	function validarSQL($command_sql){
+
+		$command_sql = strtoupper($command_sql);
+
+		if ( strstr( $command_sql, 'ALTER' ))
+		{
+			return false;
+		} 
+		else if ( strstr( $command_sql, 'DROP' ))
+		{
+			return false;
+		} 
+		else if ( strstr( $command_sql, 'DELETE' ))
+		{
+			return false;
+		} 
+		else if ( strstr( $command_sql, 'UPDATE' ))
+		{
+			return false;
+		} 
+		else if ( strstr( $command_sql, 'INSERT' ))
+		{
+			return false;
+		} 
+		else
+		{
+			return true;
+		}
+	}
+
+
+} #EOC

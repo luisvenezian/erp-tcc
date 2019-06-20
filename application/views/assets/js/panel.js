@@ -3,7 +3,8 @@
  * para controller de pesquisa.
  * 
  */ 
-function dispararPesquisa() {
+function dispararPesquisa() 
+{
   var href = "\\pesquisa?value=";
   var pesquisa = $("input[name=pesquisador]").val();
   var enviar = href.concat(pesquisa);

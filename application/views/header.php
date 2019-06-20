@@ -22,6 +22,8 @@
     <link href="application\views\assets\css\panel.css" rel="stylesheet">
     <!-- Estilos customizados para Footer -->
     <link rel="stylesheet" href="application\views\assets\css\footer.css">
+    <!-- Sweet Alert -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.js"></script>
 
   </head>
   <body>

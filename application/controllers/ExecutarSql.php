@@ -21,9 +21,26 @@ class ExecutarSql extends CI_Controller {
 
 			if (!is_null($dados_do_formulario['instrucaosql'])) 
 			{
-				$result_sql['table'] = $this->bd->getHTMLTableBySQL($dados_do_formulario['instrucaosql']);
-				
-				$this->load->view('executarsql',$result_sql);
+				if($this->bd->validarSQL($dados_do_formulario['instrucaosql']))
+				{
+					if ( ! $this->db->simple_query($dados_do_formulario['instrucaosql']))
+					{
+						$result_sql['error'] = 'sintase';
+						$this->load->view('executarsql',$result_sql);
+					}
+					else
+					{
+						$result_sql['table'] = $this->bd->getHTMLTableBySQL($dados_do_formulario['instrucaosql']);
+						$this->load->view('executarsql',$result_sql);
+					}
+				}
+				else 
+				{
+					
+					$result_sql['error'] = 'permissao';
+					$this->load->view('executarsql',$result_sql);
+				}
+
 			}
 			else 
 			{
