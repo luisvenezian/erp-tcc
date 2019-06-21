@@ -96,6 +96,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a <?php echo getNavLinkType('perfil',$controller);?> href="\perfil">
+                  <span data-feather="users"></span>
+                  Meu Perfil
+                </a>
+              </li>
+              <li class="nav-item">
                 <a <?php echo getNavLinkType('executarsql',$controller);?> href="\executarsql">
                   <span data-feather="database"></span>
                   Executar SQL
