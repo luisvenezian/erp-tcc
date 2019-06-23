@@ -1,4 +1,4 @@
-# ![alt text](C:\Users\Luis\Documents\dev\erp\application\documentation\doc_img\logo\icon-hinode.png "Logo Hinode")  Usuários e Permissões
+# ![alt text](https://github.com/venezianluis/erp/blob/master/application/documentation/doc_img/logo/icon-hinode.png)  Usuários e Permissões
 
 ### Autor: Luis Felipe A. Venezian
 ### Data: 23/06/2019
@@ -6,7 +6,7 @@
 # Modelagem de dados
 O arranjo desenvolvido mantem-se restringe algumas situações a fim de garantir a integridade dos dados,
 faciliando sua administração.
-![Modelagem](C:\Users\Luis\documents\dev\erp\application\documentation\database\img\er_diagram_users_concessions.jpg)
+![Modelagem](https://github.com/venezianluis/erp/blob/master/application/documentation/database/img/er_diagram_users_concessions.jpg)
 
 ### Decrição por Coluna 
 ##### USERS.PROFILES 
