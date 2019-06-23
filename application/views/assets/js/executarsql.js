@@ -20,3 +20,32 @@ function SwalSqlError(type)
 		})
 	}
 }
+
+
+function helpSelect(type){
+
+	if (type == 'qualificacoes')
+	{
+		document.getElementById("txtarea").value = "SELECT * FROM [dbo].[qualificacoes]";
+	}
+	else if (type == 'ocorrencias')
+	{
+		document.getElementById("txtarea").value = "SELECT * FROM [dbo].[fat_ocorrencia]";
+	}
+	else if (type == 'operacoes')
+	{
+		document.getElementById("txtarea").value = "SELECT * FROM [dbo].[ext_operacao]";
+	}
+	else if (type == 'bi')
+	{
+		document.getElementById("txtarea").value = "SELECT * FROM [dbo].[dados_bi]";
+	}
+	else if (type == 'usuarios')
+	{
+		document.getElementById("txtarea").value = "SELECT * FROM [dbo].[sys_usuario] WHERE [usuario] = 'INSERIR_USUARIO'";
+	}
+	else if (type == 'clear')
+	{
+		document.getElementById("txtarea").value = "";
+	}
+}

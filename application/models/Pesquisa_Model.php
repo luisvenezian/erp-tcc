@@ -11,9 +11,10 @@ class Pesquisa_Model extends CI_Model {
     public function validaPesquisa($user, $search)
 	{
         $command_sql = "SELECT TOP 2 *
-                        FROM [users].[permission] AS P
-                        JOIN [si].[application] AS A ON A.APP_ID = P.APP_ID
-                        WHERE P.[user_name] = '".$user."' AND A.[APP_NAME] = '".$search."'";
+                        FROM [users].[concessions] AS P
+                        JOIN [si].[applications] AS A ON A.ID_APP = P.APP_ID
+                        JOIN [users].[profiles] AS UP ON UP.ID_USER = P.USER_ID 
+                        WHERE UP.[user_login] = '".$user."' AND A.[APP_NAME] = '".$search."'";
 
         $query = $this->db->query($command_sql);
         
@@ -22,7 +23,7 @@ class Pesquisa_Model extends CI_Model {
     
     public function getControllerByName($search){
 
-        $command_sql = "SELECT TOP 1 APP_NAME_CONTROLLER FROM [si].[application] WHERE [APP_NAME] = '".$search."'";
+        $command_sql = "SELECT TOP 1 APP_NAME_CONTROLLER FROM [si].[applications] WHERE [APP_NAME] = '".$search."'";
         $query = $this->db->query($command_sql);
         $array = $query->result_array(); 
 

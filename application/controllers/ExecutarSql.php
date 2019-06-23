@@ -15,8 +15,8 @@ class ExecutarSql extends CI_Controller {
 		if (verify_logged() <> true){
 			redirect('login','refresh');
 		}
-		else{
- 
+		else
+		{
 			$dados_do_formulario['instrucaosql'] = $this->input->post('instrucaosql'); 
 
 			if (!is_null($dados_do_formulario['instrucaosql'])) 

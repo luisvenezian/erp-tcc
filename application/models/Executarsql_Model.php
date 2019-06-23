@@ -20,13 +20,13 @@ class ExecutarSql_Model extends CI_Model {
 
 		$num_rows = $query->num_rows();
 		
-		 
-		if ($num_rows > 0) {
-
-		$table  = "<table class ='table  table-striped'><tr>\n";
+		$table  = "<table class ='table  table-striped table-bordered'><tr>\n";
 		$table .= "<thead class='thead-light'>\n";
 		$table .= "<tr>\n";
 			
+		if ($num_rows > 0) 
+		{
+
 		foreach ($query->list_fields() as $field)
 		{
 			$table .= "<th scope='col'><b>".$field."</b></th>";
@@ -50,6 +50,17 @@ class ExecutarSql_Model extends CI_Model {
 		
 		$table .= "</tbody>\n";
 		$table .= "</table>\n";
+		}
+		else 
+		{
+			$table .= "<th scope='col'><b> ;( Nenhum registro encontrado no banco de dados para instrução: </b></th>";
+			$table .= "</tr>\n"; 
+			$table .= "</tread>\n"; 
+			$table .= "<tbody>\n";
+			$table .= "<tr><td>".$command_sql."</td></tr>";
+			$table .= "</tbody>\n";
+			$table .= "</table>\n";
+		
 		}
 
 		return $table;

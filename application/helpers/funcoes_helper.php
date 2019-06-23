@@ -48,8 +48,8 @@ if (!function_exists('getUserName')){
 }
 
 /* 
- * Aplica��es do Usu�rio,
- * Todas as aplica��es que o usu�rio pode acessar, influencia as pesquisas.
+ * Aplicaçoes do Usuário,
+ * Todas as aplicações que o usuário pode acessar, influencia as pesquisas.
  */ 
 
 if (!function_exists('setApplicationsUser')){
@@ -69,7 +69,7 @@ if (!function_exists('getApplicationsUser')){
 }
 
 /* 
- * Carrega uma option list com id hist�rico de buscas.
+ * Carrega uma option list com id histórico de buscas.
  */
 
 if (!function_exists('getHistoryList')){

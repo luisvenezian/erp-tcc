@@ -76,7 +76,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'MYPC',
+	'hostname' => 'LAPTOP-O0KHNNPV',
 	'username' => 'ti_admin',
 	'password' => '@1q1q2w2w',
 	'database' => 'admin',
@@ -123,4 +123,4 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
- */ 
+*/
