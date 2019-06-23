@@ -25,6 +25,13 @@
     <!-- Sweet Alert -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.js"></script>
 
+    <!-- JS e CSS para Tabulator Framework -->
+    <link href="application\views\assets\css\tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="application\views\assets\js\tabulator.min.js"></script>
+
+    <link href="https://unpkg.com/tabulator-tables@4.2.7/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.2.7/dist/js/tabulator.min.js"></script>
+    
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">

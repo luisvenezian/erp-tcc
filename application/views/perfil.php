@@ -1,48 +1,10 @@
-<?php $data['controller'] = "perfil";
-$this->load->view('header',$data) ?>
-<!------ Include the above in your HEAD tag ---------->
+<?php 
 
-<style>
-body{
-		background: linear-gradient(90deg, #e8e8e8 50%, #F7DC6F 50%);
-	}
-	.portfolio{
-		padding:6%;
-		text-align:center;
-	}
-	.heading{
-		background: #fff;
-		padding: 1%;
-		text-align: left;
-		box-shadow: 0px 0px 1px 0px #545b62;
-	}
-	.heading img{
-		width: 7%;
-	}
-	.bio-info{
-		padding: 5%;
-		background:#fff;
-		box-shadow: 0px 0px 1px 0px #545b62;
-	}
-	.name{
-		font-family: 'Charmonman', cursive;
-		font-weight:600;
-	}
-	.bio-image{
-		text-align:center;
-	}
-	.bio-image img{
-		border-radius:0%;
-	}
-	.bio-content{
-		text-align:left;
-	}
-	.bio-content p{
-		font-weight:600;
-		font-size:30px;
-	}
-</style>
-
+	$data['controller'] = "perfil";
+	$this->load->view('header',$data) 
+	
+?>
+<link rel = "stylesheet" type = "text/css" href = "application\views\assets\css\perfil.css"/>
 <div class="container portfolio">
 <br>
 	<div class="row">
@@ -58,7 +20,7 @@ body{
 				<div class="row">
 					<div class="col-md-12">
 						<div class="bio-image">
-							<img src="application\archives\luis.jpg" class="img-fluid img-thumbnail" alt="image" height="200" width="300"/>
+							<img src= "<?php echo $user_url_img; ?>"class="img-fluid img-thumbnail" alt="image" height="200" width="300"/>
 						</div>			
 					</div>
 				</div>	
@@ -66,14 +28,14 @@ body{
 			<div class="col-md-6">
 				<div class="bio-content">
 				
-					<h2>Luis Felipe</h2>
-					<h6>I have no special talent, I'm just passionately curious ;)</h6>
+					<h2><?php echo $user_first_name; ?></h2>
+					<h6><?php echo $user_bio; ?></h6>
 					<hr>
 
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class='nav-link'>
-							<span data-feather="user"></span> KPL.LUIS
+							<span data-feather="user"></span> <?php echo $user_login; ?>
 							</a>
 						</li>
 					</ul>
@@ -81,7 +43,7 @@ body{
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class='nav-link'>
-							<span data-feather="phone"></span> (14) 99824-5302
+							<span data-feather="phone"></span>  <?php echo $user_phone; ?>
 							</a>
 						</li>
 					</ul>
@@ -89,7 +51,7 @@ body{
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class='nav-link'>
-							<span data-feather="mail"></span> luis.venezian@kplay.com.br
+							<span data-feather="mail"></span>  <?php echo $user_email; ?>
 							</a>
 						</li>
 					</ul>
@@ -97,7 +59,7 @@ body{
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class='nav-link'>
-							<span data-feather="code"></span> Banco de Dados
+							<span data-feather="code"></span>  <?php echo $user_job_role; ?>
 							</a>
 						</li>
 					</ul>
@@ -108,9 +70,4 @@ body{
 		</div>	
 	</div>
 </div>
-		
-
-
-
-
 <?php $this->load->view('footer') ?>

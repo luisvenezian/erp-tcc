@@ -4,10 +4,14 @@ $this->load->view('header',$data)
         /* 
          * Formulário: 
          */ 
-         
+
 ?>
         <script type='text/javascript' src="application\views\assets\js\executarsql.js">js/jquery.min.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "application\views\assets\css\executarsql.css"/>
+
+        <script type="text/javascript" src="http://oss.sheetjs.com/js-xlsx/xlsx.full.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.5/jspdf.plugin.autotable.js"></script>
 
         <!-- Aqui vai o conteúdo -->
         <h5>Use esta <code>&lt;section&gt;</code> para executar comandos T-SQL.</h5>
@@ -66,6 +70,15 @@ $this->load->view('header',$data)
         {
                 echo "<hr class='my-4'>\n";
                 echo $table;
-        }
+                echo "<hr class='my-4'>\n";
+                ?>
+                <button id="download-csv" type="button" class="btn btn-outline-info btn-sm">Download CSV</button>
+                <button id="download-json" type="button" class="btn btn-outline-info btn-sm">Download JSON</button>
+                <button id="download-xlsx" type="button" class="btn btn-outline-info btn-sm">Download XLSX</button>
+                <button id="download-pdf" type="button" class="btn btn-outline-info btn-sm">Download PDF</button>
+                <hr class='my-4'>
+                <?php 
+        }       
         ?>
+
 <?php $this->load->view('footer') ?>

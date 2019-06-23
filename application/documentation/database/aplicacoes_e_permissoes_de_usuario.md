@@ -27,6 +27,7 @@ user_phone_number | Número de telefone do usuário
 user_phone_prefix | Prefixo do número de telefone do usuário
 user_job_role | Cargo do usuário
 user_bio | Descrição de biografica do usuário 
+user_url_img | Camiinho relativo para acesso a imagem de perfil do usuário 
 
 ##### SI.APPLICATIONS 
 Tabela armazena todas as aplicações do sistema.

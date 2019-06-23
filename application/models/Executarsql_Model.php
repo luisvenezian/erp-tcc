@@ -20,7 +20,7 @@ class ExecutarSql_Model extends CI_Model {
 
 		$num_rows = $query->num_rows();
 		
-		$table  = "<table class ='table  table-striped table-bordered'><tr>\n";
+		$table  = "<table id='id_table' class ='table  table-striped table-bordered'>\n";
 		$table .= "<thead class='thead-light'>\n";
 		$table .= "<tr>\n";
 			
@@ -62,7 +62,6 @@ class ExecutarSql_Model extends CI_Model {
 			$table .= "</table>\n";
 		
 		}
-
 		return $table;
 	}
 

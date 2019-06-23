@@ -22,7 +22,8 @@ function SwalSqlError(type)
 }
 
 
-function helpSelect(type){
+function helpSelect(type)
+{
 
 	if (type == 'qualificacoes')
 	{
@@ -49,3 +50,31 @@ function helpSelect(type){
 		document.getElementById("txtarea").value = "";
 	}
 }
+
+window.onload = function()
+{
+	var table = new Tabulator("#id_table", {});
+	
+	//trigger download of data.csv file
+	$("#download-csv").click(function(){
+		table.download("csv", "data.csv");
+	});
+
+	//trigger download of data.json file
+	$("#download-json").click(function(){
+		table.download("json", "data.json");
+	});
+
+	//trigger download of data.xlsx file
+	$("#download-xlsx").click(function(){
+		table.download("xlsx", "data.xlsx", {sheetName:"My Data"});
+	});
+
+	//trigger download of data.pdf file
+	$("#download-pdf").click(function(){
+		table.download("pdf", "data.pdf", {
+			orientation:"portrait", 
+			title:"Executarl SQL", 
+		});
+	});
+};

@@ -47,6 +47,20 @@ if (!function_exists('getUserName')){
 	}
 }
 
+ /* 
+  * Retorna o parâmetro passado na sessão;
+  *
+  */
+
+if (!function_exists('getSession')){
+
+	function getSession($param)
+	{
+		$ci = & get_instance();
+		return $ci->session->userdata($param); 
+	}
+}
+
 /* 
  * Aplicaçoes do Usuário,
  * Todas as aplicações que o usuário pode acessar, influencia as pesquisas.

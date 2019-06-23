@@ -35,10 +35,10 @@ class Login extends CI_Controller {
 		{
 			if($this->bd->validarSenhaUsuario($dados_do_formulario['senha']))
 			{
-				$id_user = $this->bd->getUserIdByUserName($dados_do_formulario['usuario']);
+				$user_id = $this->bd->getUserIdByUserName($dados_do_formulario['usuario']);
 				$this->session->set_userdata('logged', TRUE);
 				$this->session->set_userdata('user_login',$dados_do_formulario['usuario']);
-				$this->session->set_userdata('id_user',$id_user);
+				$this->session->set_userdata('user_id',$user_id);
 				redirect('panel','refresh');
 			}
 			else 
