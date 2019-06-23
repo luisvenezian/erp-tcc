@@ -10,3 +10,6 @@
 - [x] Todas as Primary Keys devem respeitar o padrão: PK_TABLENAME_COLUMNCONSTRAINT (Ou PKC, se composta), onde TABLENAME é o nome da tabela e COLUMNCONSTRAINT o nome da coluna de chave primária. 
 - [x] Todas as Foreign Keys devem respeitar o padrão: FK_TABLENAME_COLUMNCONSTRAINT, onde TABLENAME é o nome da tabela e COLUMNCONSTRAINT o nome da coluna de chave estrangeira.
 - [x] Todas as Views devem ser iniciadas com prefixo "vw_".
+
+<img src="https://github.com/venezianluis/erp/blob/master/application/documentation/database/img/bd.gif" alt="Gif Banco de Dados" width="300"/>
+
