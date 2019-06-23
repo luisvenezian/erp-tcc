@@ -4,6 +4,7 @@
 ### Data: 23/06/2019
 
 - [x] Todos os nomes dos objetos devem estar com fonte caixa baixa.
+- [x] Todos os nomes dos objetos devem ser auto explicativos.
 - [x] Todos os nomes dos objetos devem ser separados por "_" (underline).
 - [x] Todos os objetos do tipo procedure devem possuir sufixo "_sp".
 - [x] Todas as Primary Keys devem respeitar o padrão: PK_TABLENAME_COLUMNCONSTRAINT (Ou PKC, se composta), onde TABLENAME é o nome da tabela e COLUMNCONSTRAINT o nome da coluna de chave primária. 
