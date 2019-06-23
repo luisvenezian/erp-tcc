@@ -4,7 +4,7 @@
 ### Data: 23/06/2019
 
 # Modelagem de dados
-O arranjo desenvolvido mantem-se restringe algumas situações a fim de garantir a integridade dos dados,
+O arranjo desenvolvido restringe algumas situações a fim de garantir a integridade dos dados,
 faciliando sua administração.
 ![Modelagem](https://github.com/venezianluis/erp/blob/master/application/documentation/database/img/er_diagram_users_concessions.jpg)
 
