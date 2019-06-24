@@ -35,10 +35,12 @@
   </head>
   <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="\panel">
       <img id="mainlogo" href="" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
-     
+
     <input name="pesquisador" class="form-control form-control-dark" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
+
     <div class="input-group-btn">
     <a id="disparapesquisa" href="\pesquisa">
       <button onclick="dispararPesquisa()" class="btn btn-outline-secondary" type="">Pesquisar</button>

@@ -7,6 +7,7 @@ class Perfil extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Perfil_Model','bd');
+		$this->load->helper('form');
 	}
 
 	public function index()
@@ -33,15 +34,18 @@ class Perfil extends CI_Controller {
 				$data['user_bio'] = $result_sql[0]->user_bio ? $result_sql[0]->user_bio : ''; 
 				$data['user_url_img'] = $result_sql[0]->user_url_img ? $result_sql[0]->user_url_img : ''; 
 
+				// Para editar troca a view
+				$data_request['editar'] = $this->input->get('editar') ? $this->input->get('editar') : 0;
+
+				if ( $data_request['editar'] == 1 )
+				{
+					$this->load->view('perfil_editar',$data);
+				}
+			
 				$this->load->view('perfil',$data);
 			}
 			
 		}
-	}
-
-	public function alterar(){
-		echo "alterar perfil"; exit;
-
 	}
 
 }
