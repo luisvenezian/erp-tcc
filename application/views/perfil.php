@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="heading">				
-				<img src="application\img\perfil-img-logo.png" />
+				<img src="application\img\perfil-img-logo.png" /><strong>Visualizar Perfil</strong>
 			</div>
 		</div>	
 	</div>
@@ -44,7 +44,7 @@
 					<ul class="nav flex-column">
 						<li class="nav-item">
 							<a class='nav-link'>
-							<span data-feather="phone"></span>  <?php echo $user_phone; ?>
+							<span data-feather="phone"></span>  <?php echo "(". $user_phone_prefix .") - ". $user_phone_number ; ?>
 							</a>
 						</li>
 					</ul>

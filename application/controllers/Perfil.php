@@ -7,7 +7,7 @@ class Perfil extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Perfil_Model','bd');
-		$this->load->helper('form');
+		$this->load->helper('form','url');
 	}
 
 	public function index()
@@ -15,8 +15,8 @@ class Perfil extends CI_Controller {
 		if (verify_logged() <> true){
 			redirect('login','refresh');
 		}
-		else{
-
+		else
+		{
 			/* Informações que devem ser passadas para view.
 			 * Nome, Usuário, Biografia, Numero do Prefixo concatenado com Telefone, E-Mail e Profissão.
 			 * 
@@ -29,7 +29,8 @@ class Perfil extends CI_Controller {
 				$data['user_first_name'] = $result_sql[0]->user_first_name ? $result_sql[0]->user_first_name : '';
 				$data['user_login'] = $result_sql[0]->user_login ? $result_sql[0]->user_login : '';
 				$data['user_email'] = $result_sql[0]->user_email ? $result_sql[0]->user_email : '';
-				$data['user_phone'] = $result_sql[0]->user_phone ? $result_sql[0]->user_phone : '';
+				$data['user_phone_number'] = $result_sql[0]->user_phone_number ? $result_sql[0]->user_phone_number : '';
+				$data['user_phone_prefix'] = $result_sql[0]->user_phone_prefix ? $result_sql[0]->user_phone_prefix : '';
 				$data['user_job_role'] = $result_sql[0]->user_job_role ? $result_sql[0]->user_job_role : ''; 
 				$data['user_bio'] = $result_sql[0]->user_bio ? $result_sql[0]->user_bio : ''; 
 				$data['user_url_img'] = $result_sql[0]->user_url_img ? $result_sql[0]->user_url_img : ''; 
@@ -41,11 +42,49 @@ class Perfil extends CI_Controller {
 				{
 					$this->load->view('perfil_editar',$data);
 				}
-			
-				$this->load->view('perfil',$data);
+				else 
+				{
+					$this->load->view('perfil',$data);
+				}
 			}
-			
 		}
+
 	}
 
+	public function gravar()
+	{
+		
+		$user_id = getSession('user_id');
+		
+		$config['upload_path']          = 'application\archives';
+		$config['allowed_types']        = 'jpg|png';
+		$config['max_size']             = 2048; // 2MB
+		$config['max_width']            = 0; // No limit size 
+		$config['max_height']           = 0; // No limit size 
+		$config['file_name']		    = $user_id. "_" . mt_rand(1, 99999);
+		$dados_do_formulario = $this->input->post(); 
+		
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('user_file'))
+		{
+				$file_extension = $this->upload->data('file_ext'); 
+				$dados_do_formulario['user_url_img'] = $config['upload_path'] . "\\". $config['file_name'] . $file_extension;
+		}
+		else 
+		{
+			$dados_do_formulario['user_url_img'] = NULL;
+		}
+
+
+		if ( ! $this->bd->atualizarPerfil($dados_do_formulario, $user_id) )
+		{
+			$data['error'] = "Problema ao atualizar!";
+			$this->load->view('perfil', $data);
+		}
+		else
+		{
+			echo "<h1>Imagem atualizada com sucesso!</h1>";
+		}
+	}
 }
