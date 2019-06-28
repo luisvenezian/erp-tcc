@@ -67,21 +67,24 @@ class Perfil extends CI_Controller {
 
 		$this->load->library('upload', $config);
 
+		
+
 		if ($this->upload->do_upload('user_file'))
-		{
-				$file_extension = $this->upload->data('file_ext'); 
-				$file_size = $this->upload->data('file_size');
+		{	
+				$file_extension = $this->upload->data('file_ext');
 				$dados_do_formulario['user_url_img'] = $config['upload_path'] . "\\". $config['file_name'] . $file_extension;
 		}
 		else 
 		{
-			$dados_do_formulario['user_url_img'] = NULL;
+			$error = array('error' => $this->upload->display_errors());
+		    $dados_do_formulario['user_url_img'] = NULL;
 		}
 
 
 		if ($this->bd->atualizarPerfil($dados_do_formulario, $user_id))
 		{
 			$result_sql = $this->bd->getPerfil($user_id);
+			
 			$data['user_first_name'] = $result_sql[0]->user_first_name ? $result_sql[0]->user_first_name : '';
 			$data['user_login'] = $result_sql[0]->user_login ? $result_sql[0]->user_login : '';
 			$data['user_email'] = $result_sql[0]->user_email ? $result_sql[0]->user_email : '';
@@ -94,25 +97,26 @@ class Perfil extends CI_Controller {
 
 
 			// validando envio da imagem
-			if (isset($file_extension))
+			if (isset($error))
 			{
-
-				if (($file_extension <> 'jpg') || ($file_extension <> 'png'))
-				{
-				$data['editar'] = 3;
-				$this->load->view('perfil',$data);
-				}
-
-				else if ( $file_size > 2048)
-				{
+				if ( strcmp($error['error'],'<p>You did not select a file to upload.</p>') <> 0)
+				{	
 					$data['editar'] = 3;
 					$this->load->view('perfil',$data);
 				}
+				
+				else 
+				{
+					$this->load->view('perfil',$data);
+				}
 			}
+
 			else 
 			{
-			$this->load->view('perfil',$data);
+				$this->load->view('perfil',$data);
 			}
+
+
 		}
 	}
 }
