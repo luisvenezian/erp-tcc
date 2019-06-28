@@ -15,20 +15,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/aab0d1297c.js"></script>
-
-    <!-- JS Panel -->
-    <script src="application\views\assets\js\panel.js"></script>
-    <!-- Estilos customizados para esse template -->
-    <link href="application\views\assets\css\panel.css" rel="stylesheet">
-    <!-- Estilos customizados para Footer -->
-    <link rel="stylesheet" href="application\views\assets\css\footer.css">
-    <!-- Sweet Alert -->
+    <script src=<?=base_url('application/views/assets/js/panel.js')?> ></script>
+    <link href=<?=base_url('application/views/assets/css/panel.css')?> rel="stylesheet">
+    <link rel="stylesheet" href= <?=base_url('application\views\assets\css\footer.css')?>>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.js"></script>
-
-    <!-- JS e CSS para Tabulator Framework -->
-    <link href="application\views\assets\css\tabulator.min.css" rel="stylesheet">
+    <link href=<?=base_url('application\views\assets\css\tabulator.min.css')?> rel="stylesheet">
     <script type="text/javascript" src="application\views\assets\js\tabulator.min.js"></script>
-
     <link href="https://unpkg.com/tabulator-tables@4.2.7/dist/css/tabulator.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.2.7/dist/js/tabulator.min.js"></script>
     
@@ -37,7 +29,7 @@
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="\panel">
-      <img id="mainlogo" href="" src="application\img\icon-hinode.png" width="35" height="35" alt=""> Painel Administrador</a>
+      <img id="mainlogo" href="" src=<?=base_url('application\img\icon-hinode.png')?> width="35" height="35" alt=""> Painel Administrador</a>
 
     <input name="pesquisador" class="form-control form-control-dark" type="text" list="historico" placeholder="Pesquise por alguma ferramenta" aria-label="Search">
 
@@ -46,8 +38,6 @@
       <button onclick="dispararPesquisa()" class="btn btn-outline-secondary" type="">Pesquisar</button>
     </a>
     </div>
-
-
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="login\sair">  

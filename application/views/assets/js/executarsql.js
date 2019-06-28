@@ -16,7 +16,7 @@ function SwalSqlError(type)
 	{
 		Swal.fire({
 			type: 'error',
-			title: 'Síntaxe incorreta...',
+			title: 'Não foi possível atualizar sua imagem! :(',
 		})
 	}
 }

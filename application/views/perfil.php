@@ -1,16 +1,40 @@
 <?php 
 
 	$data['controller'] = "perfil";
-	$this->load->view('header',$data) 
-	
+	$this->load->view('header',$data);
+
+	if(isset($editar))
+	{
+		?> <script type='text/javascript' src=<?=base_url('application\views\assets\js\perfil.js')?>></script> <?php 
+
+		if ($editar == 2)
+		{
+			?>
+			<script>
+                        SwalSqlEditado('sucesso');
+			</script>
+
+			<?php 
+		}
+
+		else if ($editar == 3)
+		{	
+			?>
+			<script>
+                        SwalSqlEditado('erro');
+			</script>
+
+			<?php 
+		}
+	}
 ?>
-<link rel = "stylesheet" type = "text/css" href = "application\views\assets\css\perfil.css"/>
+<link rel = "stylesheet" type = "text/css" href = <?=base_url('application\views\assets\css\perfil.css')?>/>
 <div class="container portfolio">
 <br>
 	<div class="row">
 		<div class="col-md-12">
 			<div class="heading">				
-				<img src="application\img\perfil-img-logo.png" /><strong>Visualizar Perfil</strong>
+				<img src=<?=base_url('application\img\perfil-img-logo.png')?>/><strong>Visualizar Perfil</strong>
 			</div>
 		</div>	
 	</div>
@@ -21,9 +45,9 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="bio-image">
-							<img src= "<?php echo $user_url_img; ?>"class="img-fluid img-thumbnail" alt="image" height="200" width="300"/>
+							<img src= <?=base_url($user_url_img) ?> class="img-fluid img-thumbnail" alt="image" height="200" width="300"/>
 						</div>			
-					</div>
+					</div>	
 				</div>	
 			</div>
 			<div class="col-md-6">
@@ -65,7 +89,7 @@
 						</li>
 					</ul>
 					<hr>
-					<a href="perfil?editar=1"><button type="button" class="btn btn-outline-dark">Editar Informações</button></a>
+					<a href=<?= base_url('perfil?editar=1') ?>><button type="button" class="btn btn-outline-dark">Editar Informações</button></a>
 				</div>
 			</div>
 		</div>	
