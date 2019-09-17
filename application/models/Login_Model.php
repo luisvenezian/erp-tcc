@@ -10,25 +10,25 @@ class Login_Model extends CI_Model {
 	
 	public function validarUsuario($user)
 	{
-		$command_sql = "SELECT TOP 1 * FROM users.profiles WHERE user_login = '".$user."'";
+		$command_sql = "SELECT TOP 1 * FROM base.usuarios WHERE usuario = '".$user."'";
 		$query = $this->db->query($command_sql);
 		return ($query->num_rows() == 1) ? true : false;
 	}
 
 	public function validarSenhaUsuario($passworduser)
 	{
-		$command_sql = "SELECT TOP 1 * FROM users.profiles WHERE user_password = '".$passworduser."'";
+		$command_sql = "SELECT TOP 1 * FROM base.usuarios WHERE senha = '".$passworduser."'";
 		$query = $this->db->query($command_sql);
 		return ($query->num_rows() == 1) ? true : false;
 	}
 
 	public function getUserIdByUserName($user_name){
-		$command_sql = "SELECT TOP 1 ID_USER FROM users.profiles WHERE user_login = '".$user_name."'";
+		$command_sql = "SELECT TOP 1 idUsuario FROM base.usuarios WHERE usuario = '".$user_name."'";
 		$query = $this->db->query($command_sql);
 
 		foreach ($query->result() as $row)
 		{
-				$result = $row->ID_USER;
+				$result = $row->idUsuario;
 		}
 		return $result;
 	}

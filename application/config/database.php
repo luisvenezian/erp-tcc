@@ -76,10 +76,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'LAPTOP-O0KHNNPV',
-	'username' => 'ti_admin',
-	'password' => '@1q1q2w2w',
-	'database' => 'admin',
+	'hostname' => 'ouriplay.cqmu09ufpqzt.us-east-2.rds.amazonaws.com',
+	'username' => 'admin',
+	'password' => '1q1q2w2w',
+	'database' => 'suinos',
 	'dbdriver' => 'sqlsrv',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

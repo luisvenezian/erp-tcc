@@ -15,9 +15,6 @@ class Panel extends CI_Controller {
 			redirect('login','refresh');
 		}
 		else{
-			$user_session = getUserName();
-			$data = $this->bd->getApplicacoes($user_session);
-			setApplicationsUser($data);
 			$this->load->view('panel');
 		}
 	}

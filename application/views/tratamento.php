@@ -1,7 +1,7 @@
 <?php 
-$data['controller'] = "cliente";
+$data['controller'] = "tratamento";
 $this->load->view('header',$data) ?>
         <!-- Aqui vai o conteúdo -->
-        <h2>Tela de Clientes</h2>
+        <h2>Tela de Tratamento</h2>
         
 <?php $this->load->view('footer') ?>

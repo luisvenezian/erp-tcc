@@ -1,11 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pedido extends CI_Controller {
+class Tratamento extends CI_Controller {
 
 function __construct(){
     parent::__construct();
-    #$this->load->model('Panel_Model','bd');
+    $this->load->model('Tratamento_Model','bd');
 }
 
 public function index()
@@ -14,7 +14,11 @@ public function index()
         redirect('login','refresh');
     }
     else{
-        $this->load->view('pedido');
+        $this->load->view('tratamento');
     }
 }
+public function tratamento(){
+    $this->load->view('tratamento');
+}
+
 }

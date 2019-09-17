@@ -13,7 +13,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/application/views/assets/css/login.css">
 </head>
-<body>
+<body background="application\img\background.jpeg">
     <div class="login-form">
         <?php echo form_open("login/autenticar"); 
         
@@ -21,7 +21,7 @@
         echo "<div class='alert alert-danger'>\n<strong>Atenção!</strong>". $msg ."</div>";
         ?>
             <div class="text-center">
-                <img src="application\img\hnd-login-logo.png" class="img avatar" alt="Avatar">
+                <img src="application\img\icon-porco.png" class="img avatar" alt="Avatar">
             </div>
             <div class="form-group">
                 <input name="usuario" type="text" class="form-control" placeholder="Usuário ou E-mail" required="required">
