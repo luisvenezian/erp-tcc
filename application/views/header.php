@@ -69,38 +69,42 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('produto', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="file"></span>Cadastro</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> href="produto\cadastroVacinas">Vacinas</a>
-                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> href="produto\cadastroDietas">Dietas</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/cadastroVacinas') ?>>Vacinas</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/cadastroDietas') ?>>Dietas</a>
               </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('produto', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="shopping-cart"></span>Produtos</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> href="produto\vacina">Vacinas</a>
-                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> href="produto\dieta">Dietas</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/vacina') ?>>Vacinas</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/dieta') ?>>Dietas</a>
               </div>
             </li>
             <li class="nav-item">
               <a <?php echo getNavLinkType('estoque', $controller); ?> href="\estoque">
-                <span data-feather="bar-chart-2"></span>
+                <span data-feather="package"></span>
                 Estoque
               </a>
             </li>
             <li class="nav-item">
               <a <?php echo getNavLinkType('tratamento', $controller); ?> href="\Tratamento">
-                <span data-feather="bar-chart-2"></span>
+                <span data-feather="activity"></span>
                 Tratamentos
               </a>
             </li>
             <li class="nav-item">
               <a <?php echo getNavLinkType('suino', $controller); ?> href="\Suino">
-                <span data-feather="bar-chart-2"></span>
+                <span data-feather="heart"></span>
                 Suinos
               </a>
             </li>
             <li class="nav-item">
               <a <?php echo getNavLinkType('lote', $controller); ?> href="\Lote">
-                <span data-feather="users"></span>
+                <span data-feather="codepen"></span>
                 Lotes
               </a>
             </li>
@@ -110,17 +114,14 @@
                 Relatórios
               </a>
             </li>
-            <li class="nav-item">
-              <a <?php echo getNavLinkType('integracao', $controller); ?> href="\integracao">
-                <span data-feather="layers"></span>
-                Integrações
-              </a>
-            </li>
-            <li class="nav-item">
-              <a <?php echo getNavLinkType('perfil', $controller); ?> href="\perfil">
-                <span data-feather="users"></span>
-                Meu Perfil
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('produto', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="user"></span>Usuário</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/vacina') ?>>Cadastrar</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('produto/dieta') ?>>Editar</a>
+              </div>
             </li>
             <li class="nav-item">
               <a <?php echo getNavLinkType('executarsql', $controller); ?> href="\executarsql">
@@ -129,6 +130,7 @@
               </a>
             </li>
           </ul>
+          <!-- 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>Relatórios salvos</span>
             <a class="d-flex align-items-center text-muted" href="#">
@@ -161,7 +163,9 @@
               </a>
             </li>
           </ul>
+          -->
         </div>
+        
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><br>
