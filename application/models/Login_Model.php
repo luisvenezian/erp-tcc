@@ -32,4 +32,21 @@ class Login_Model extends CI_Model {
 		}
 		return $result;
 	}
+
+
+	public function atualizarSenhaUsuario($dados)
+	{
+		$senha = $dados['senha'];
+		$senhaNova = $dados['senhaNova'];
+		$usuario = $dados['usuario'];
+
+
+		$command_sql = "UPDATE base.usuarios 
+						SET senha = '".$senhaNova."'   
+						WHERE senha = '".$senha."' AND usuario = '".$usuario."'";
+
+		return ($this->db->query($command_sql)) ? true : false;
+	}
+
+
 }

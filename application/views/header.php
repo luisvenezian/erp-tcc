@@ -120,9 +120,9 @@
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('produto', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="user"></span>Usuário</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
-                href=<?php echo base_url('produto/vacina') ?>>Cadastrar</a>
+                href=<?php echo base_url('login/cadastrar') ?>>Cadastrar</a>
                 <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
-                href=<?php echo base_url('produto/dieta') ?>>Editar</a>
+                href=<?php echo base_url('login/editar') ?>>Editar</a>
               </div>
             </li>
             <li class="nav-item">
