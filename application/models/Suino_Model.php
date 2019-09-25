@@ -57,5 +57,23 @@ class Suino_Model extends CI_Model
 	return $valida;
 	}
 	
+	function gravarSuinos($dados)
+	{
+		$sexo = $dados['sexo'];
+		$qtd = $dados['qtd'];
+		$peso = $dados['peso'];
+		$dt = $dados['dataNascimento']; 
+		$idUsuario = $dados['idUsuario'];
 
+		$command_sql = "EXEC sp_cadastrarSuino '".$qtd."','".$peso."','".$idUsuario."','".$sexo."','".$dt."'";
+		
+		try {
+			$this->db->query($command_sql);
+			$valida = true;
+		} catch (Exception $e) {
+			$valida = false;
+		}
+		return $valida;
+
+	}
 }

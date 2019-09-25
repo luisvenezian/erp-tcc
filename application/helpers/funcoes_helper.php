@@ -47,6 +47,7 @@ if (!function_exists('getUserName')){
 	}
 }
 
+
  /* 
   * Retorna o parâmetro passado na sessão;
   *

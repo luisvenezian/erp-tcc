@@ -8,6 +8,7 @@ class Suino extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Suino_Model', 'bd');
+        $this->load->model('Login_Model', 'usuario');
     }
 
     public function index()
@@ -21,5 +22,22 @@ class Suino extends CI_Controller
     public function suino()
     {
         $this->load->view('suino');
+    }
+
+    public function cadastroSuinos()
+    {
+        $this->load->view('cadastroSuinos');
+    }
+
+    public function suinosGravar()
+    {
+
+        $dados_do_formulario = $this->input->post(); 
+        $dados_do_formulario['idUsuario'] =  $this->usuario->getUserIdByUserName(getUserName());
+
+        if($this->bd->gravarSuinos($dados_do_formulario)){
+            $data['editar'] = 2;
+            $this->load->view('cadastroDietas', $data);
+        }  
     }
 }

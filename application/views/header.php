@@ -73,6 +73,8 @@
                 href=<?php echo base_url('produto/cadastroVacinas') ?>>Vacinas</a>
                 <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
                 href=<?php echo base_url('produto/cadastroDietas') ?>>Dietas</a>
+                 <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
+                href=<?php echo base_url('suino/cadastroSuinos') ?>>Suinos</a>
               </div>
             </li>
             <li class="nav-item dropdown">
