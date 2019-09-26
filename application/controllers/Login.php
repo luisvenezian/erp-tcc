@@ -61,5 +61,26 @@ class Login extends CI_Controller {
 		$this->session->unset_userdata('user_login');
 		redirect('login','refresh');
 	}
+
+	public function editar()
+	{	
+		$this->load->view('loginEditar');
+	}
+	
+	public function loginAtualizar()
+	{	
+		$dados_do_formulario = $this->input->post(); 
+
+		if($this->bd->atualizarSenhaUsuario($dados_do_formulario))
+		{
+			$data['editar'] = 2;
+		}
+		else 
+		{
+			$data['editar'] = 3;
+		}
+
+		$this->load->view('loginEditar', $data);
+	}
 	
 }
