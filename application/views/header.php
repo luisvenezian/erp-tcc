@@ -75,6 +75,8 @@
                 href=<?php echo base_url('produto/cadastroDietas') ?>>Dietas</a>
                  <a class="dropdown-item" <?php echo getNavLinkType('Produto', $controller); ?> 
                 href=<?php echo base_url('suino/cadastroSuinos') ?>>Suinos</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Lote', $controller); ?> 
+                href=<?php echo base_url('lote/cadastroLotes') ?>>Lotes</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -105,7 +107,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a <?php echo getNavLinkType('lote', $controller); ?> href="\Lote">
+              <a <?php echo getNavLinkType('lote', $controller); ?> href="\lote">
                 <span data-feather="codepen"></span>
                 Lotes
               </a>

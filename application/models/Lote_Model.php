@@ -9,4 +9,90 @@ class Lote_Model extends CI_Model
 		parent::__construct();
 	}
 
+	function consultaDieta()
+	{
+		$query = "SELECT [idProduto],[nomeProduto] FROM [base].[produtos] where [ganhoPeso] IS NOT NULL";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	function consultaVacina()
+	{
+		$query = "SELECT [idProduto],[nomeProduto] FROM [base].[produtos] where [localAPlicacao] IS NOT NULL";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+
+	public function consultaSuino(){
+		$query = "SELECT [idProduto],[nomeProduto] FROM [base].[produtos] where [localAPlicacao] IS NOT NULL";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaTipoLote(){
+		$query = "SELECT [idTipoLote]
+					,[descTipoLote]
+					FROM [controle].[tiposLote]";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaSuinoMacho(){
+		$query = "select count(*) from viewSuinosDisponiveis where sexo = 1";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaSuinoFemea(){
+		$query = "select count(*) from viewSuinosDisponiveis where sexo = 0";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+	
+	public function loteGravar($dados){
+		$nome = $dados['nome'];
+		$idTipoLote = $dados['idTipoLote']; 
+		$idDieta = $dados['idDieta']; 
+		$tempoUso = $dados['tempoUso'];
+		$idVacina = $dados['idVacina'];
+		$idUsuario = $dados['idUsuario'];
+		$qtdMacho = $dados['qtdSuinoMacho'];
+		$qtdFemea = $dados['qtdSuinoFemea'];
+		$descricao = $dados['descricao'];
+		
+		$query = "
+					exec sp_cadastrarLote 
+					@Nome = '$nome',
+					@idTipoLote = $idTipoLote,
+					@idProdutoDieta = $idDieta,
+					@idProdutoVacina = $idVacina,
+					@tempoUso = $tempoUso,
+					@qtdMacho = $qtdMacho,
+					@qtdFemea = $qtdFemea,
+					@desc = $descricao,
+					@idUsuario = $idUsuario
+		";
+		try {
+			$query = $this->db->query($query);
+			$valida = true;
+		} catch (Exception $e) {
+			$valida = false;
+		}
+		return $valida;
+	}
+
+	public function consultaLote(){
+		$query = "SELECT DISTINCT L.idLoteFull, nomeLote FROM [controle].lotes as L,[controle].informacoesLote AS IL
+					WHERE IL.idLoteFull = L.idLoteFull";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaLoteId($id){
+		$query = "SELECT  L.idLoteFull, S.sexo FROM [controle].lotes as L,[base].suinos AS S
+						WHERE S.idSuino = L.idSuino and L.idLoteFull =  $id" ;
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
 }
