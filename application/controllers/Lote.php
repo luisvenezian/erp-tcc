@@ -51,9 +51,15 @@ class Lote extends CI_Controller
     }
 
     public function consultaLote(){
-        $id = $this->input->post();
-       $dados = array("lote" => $this->bd->consultaLoteId($id)); 
-            $this->load->view('loteEditar', $dados);
+        $id = $this->input->post('idLoteFull');
+        $dados = array("suino" => $this->bd->consultaLoteId($id),
+                       "lote" => $this->bd->consultaInformacoesLote($id)); 
+        $this->load->view('loteEditar', $dados);
         
+    }
+
+    public function consultaSuino(){
+        $id = $this->input->post('idSuino');
+        $this->load->view('suinoEditar');
     }
 }

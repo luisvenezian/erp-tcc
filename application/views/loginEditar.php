@@ -4,17 +4,17 @@ $this->load->view('header', $data);
 
 if(isset($editar))
 {
-        ?> <script type='text/javascript' src=<?=base_url('application\views\assets\js\produto.js')?>></script> <?php 
+        ?> <script type='text/javascript' src="application\views\assets\js\produto.js"></script> <?php 
 
         if ($editar == 2)
         {
                 ?>
                 <script>
+                
                 SwalSqlEditado('sucesso');
                 </script>
 
                 <?php 
-                sleep(2);
                 redirect('/panel');
         }
 
@@ -22,6 +22,7 @@ if(isset($editar))
         {	
                 ?>
                 <script>
+                alert('teste');
                 SwalSqlEditado('erro');
                 </script>
 
@@ -31,6 +32,7 @@ if(isset($editar))
 
 ?>
 <!-- Aqui vai o conteúdo -->
+<script type='text/javascript' src="application\views\assets\js\produto.js"></script>
 <h2>Tela de Alteração de Usuário: <?php echo getUserName() ?></h2>
 <?php echo form_open_multipart('login/loginAtualizar'); ?>
 

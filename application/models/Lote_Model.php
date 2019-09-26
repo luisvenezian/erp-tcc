@@ -24,13 +24,15 @@ class Lote_Model extends CI_Model
 	}
 
 
-	public function consultaSuino(){
+	public function consultaSuino()
+	{
 		$query = "SELECT [idProduto],[nomeProduto] FROM [base].[produtos] where [localAPlicacao] IS NOT NULL";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
-	public function consultaTipoLote(){
+	public function consultaTipoLote()
+	{
 		$query = "SELECT [idTipoLote]
 					,[descTipoLote]
 					FROM [controle].[tiposLote]";
@@ -38,29 +40,32 @@ class Lote_Model extends CI_Model
 		return $query->result_array();
 	}
 
-	public function consultaSuinoMacho(){
+	public function consultaSuinoMacho()
+	{
 		$query = "select count(*) from viewSuinosDisponiveis where sexo = 1";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
-	public function consultaSuinoFemea(){
+	public function consultaSuinoFemea()
+	{
 		$query = "select count(*) from viewSuinosDisponiveis where sexo = 0";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
-	
-	public function loteGravar($dados){
+
+	public function loteGravar($dados)
+	{
 		$nome = $dados['nome'];
-		$idTipoLote = $dados['idTipoLote']; 
-		$idDieta = $dados['idDieta']; 
+		$idTipoLote = $dados['idTipoLote'];
+		$idDieta = $dados['idDieta'];
 		$tempoUso = $dados['tempoUso'];
 		$idVacina = $dados['idVacina'];
 		$idUsuario = $dados['idUsuario'];
 		$qtdMacho = $dados['qtdSuinoMacho'];
 		$qtdFemea = $dados['qtdSuinoFemea'];
 		$descricao = $dados['descricao'];
-		
+
 		$query = "
 					exec sp_cadastrarLote 
 					@Nome = '$nome',
@@ -82,16 +87,33 @@ class Lote_Model extends CI_Model
 		return $valida;
 	}
 
-	public function consultaLote(){
+	public function consultaLote()
+	{
 		$query = "SELECT DISTINCT L.idLoteFull, nomeLote FROM [controle].lotes as L,[controle].informacoesLote AS IL
 					WHERE IL.idLoteFull = L.idLoteFull";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
-	public function consultaLoteId($id){
-		$query = "SELECT  L.idLoteFull, S.sexo FROM [controle].lotes as L,[base].suinos AS S
-						WHERE S.idSuino = L.idSuino and L.idLoteFull =  $id" ;
+	public function consultaLoteId($id)
+	{
+		$query = "SELECT  L.idSuino as idSuino, S.sexo as sexo, L.idLoteFull as idLote FROM [controle].lotes as L,[base].suinos AS S
+						WHERE S.idSuino = L.idSuino and L.idLoteFull =  $id ";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaInformacoesLote($id)
+	{
+		$query = "SELECT * FROM viewResumoDosLotes WHERE idLoteFull = $id";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaSuinoId($id)
+	{
+		$query = "SELECT  L.idSuino as idSuino, S.sexo as sexo FROM [controle].lotes as L,[base].suinos AS S
+		WHERE S.idSuino = L.idSuino and L.idLoteFull =  $id ";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
