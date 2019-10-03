@@ -16,7 +16,11 @@ class Suino extends CI_Controller
         if (verify_logged() <> true) {
             redirect('login', 'refresh');
         } else {
-            $this->load->view('suino');
+            $dados = array(
+                "lote" => $this->bd->consultaLote(),
+                "suino" => $this->bd->consultaLoteFemea()
+            );
+            $this->load->view('cadastroSuinos', $dados);
         }
     }
     public function suino()
@@ -26,18 +30,29 @@ class Suino extends CI_Controller
 
     public function cadastroSuinos()
     {
-        $this->load->view('cadastroSuinos');
+        $dados = array("lote" => $this->bd->consultaLote());
+        $this->load->view('cadastroSuinos', $dados);
     }
 
     public function suinosGravar()
     {
-
-        $dados_do_formulario = $this->input->post(); 
+        $dados_do_formulario = $this->input->post();
         $dados_do_formulario['idUsuario'] =  $this->usuario->getUserIdByUserName(getUserName());
 
-        if($this->bd->gravarSuinos($dados_do_formulario)){
+        if ($this->bd->gravarSuinos($dados_do_formulario)) {
             $data['editar'] = 2;
             $this->load->view('cadastroDietas', $data);
-        }  
+        }
+    }
+
+    public function suinosAlterar()
+    {
+        $dados_do_formulario = $this->input->post();
+        var_dump($this->input->post());
+        $this->bd->alterarSuino($dados_do_formulario);
+        $data['editar'] = 2;
+        $dados = array("suino" => $this->bd->consultaLoteId($dados_do_formulario['idSuino']),
+                       "lote" => $this->bd->consultaInformacoesLote($dados_do_formulario['idSuino'])); 
+        $this->load->view('loteEditar', $dados);
     }
 }

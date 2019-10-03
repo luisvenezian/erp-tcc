@@ -117,4 +117,22 @@ class Lote_Model extends CI_Model
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
+
+	public function consultaSuinoAlterarId($id)
+	{
+		$query = "	SELECT IL.dtCadastroInfo,S.sexo ,S.idSuino,S.idMae, IL.idLoteFull, IL.nomeLote FROM base.suinos AS S
+						INNER JOIN [controle].lotes AS L ON (L.idSuino = S.idSuino)
+						INNER JOIN [controle].informacoesLote AS IL ON (IL.idLoteFull = L.idLoteFull)
+							WHERE S.idSuino = $id";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+	
+	public function consultaLoteAlterarSuino($id)
+	{
+		$query = "SELECT DISTINCT idLoteFull, nomeLote FROM [controle].informacoesLote AS IL
+		WHERE not idLoteFull = $id";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
 }
