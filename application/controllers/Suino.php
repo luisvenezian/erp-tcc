@@ -48,11 +48,12 @@ class Suino extends CI_Controller
     public function suinosAlterar()
     {
         $dados_do_formulario = $this->input->post();
+        $id = $this->input->post('idLoteDestino');
         var_dump($this->input->post());
         $this->bd->alterarSuino($dados_do_formulario);
         $data['editar'] = 2;
-        $dados = array("suino" => $this->bd->consultaLoteId($dados_do_formulario['idSuino']),
-                       "lote" => $this->bd->consultaInformacoesLote($dados_do_formulario['idSuino'])); 
+        $dados = array("suino" => $this->bd->consultaLoteId($id),
+                       "lote" => $this->bd->consultaInformacoesLote($id)); 
         $this->load->view('loteEditar', $dados);
     }
 }

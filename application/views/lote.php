@@ -31,10 +31,10 @@ if(isset($editar))
 <?php echo form_open_multipart('lote/consultaLote'); ?>
         <div class="form-group">
                 <label for="idLoteFull">Escolha o Lote</label>
-                <select class="browser-default custom-select" id="idLoteFull" name="idLoteFull">
+                <select class="browser-default custom-select" id="idLote" name="idLote">
                         <?php
                         foreach ($lote as $r) {
-                                $id = $r['idLoteFull'];
+                                $id = $r['idLote'];
                                 echo ("<option value='$id'>" . $r['nomeLote'] . "</option>");
                         } ?>
                 </select>

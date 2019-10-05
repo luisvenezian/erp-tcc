@@ -21,33 +21,84 @@ if (isset($editar)) {
 <?php
         }
 }
-$idLoteFull = $lote[0]['idLoteFull'];
-$date = new DateTime($lote[0]['dtCadastroInfo']);
-$tempoUso = (int) $lote[0]['infoTempoDeUso'];
-$dataAtual = strtotime(date('d-m-Y'));
-$diasRestanteDieta = abs((strtotime(($lote[0]['dtCadastroInfo']) . '+60 days') - $dataAtual) / 86400);
+
+$idLote = $lote[0]['idLote'];
+$dateCad = new DateTime($lote[0]['dtCadastroInfo']);
+$dateVenc = new DateTime($lote[0]['dtVencimentoLote']);
+$tempoLote = date_diff($dateCad, $dateVenc);
+
+$dateCadDieta = new DateTime($lote[0]['dtInicioAplicacao']);
+$dateVencDieta = new DateTime($lote[0]['dtFimAplicacao']);
+$tempoDieta = date_diff($dateCadDieta, $dateVencDieta);
+
+$dateCadVacina = new DateTime($lote[1]['dtInicioAplicacao']);
+$dateVencVacina = new DateTime($lote[1]['dtFimAplicacao']);
+$tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
 ?>
 
-<h2>Tela de Controle do <?php echo ($lote[0]['nomeLote']); ?></h2>
+<h2>Tela de Controle<br>Lote: <?php echo ($lote[0]['nomeLote']); ?></h2>
 <div class="form-group">
+        <hr>
         <label for="nome">Fase Atual: <?php echo ($lote[0]['nome']); ?></label><br>
-        <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($date->format('Y-m-d')); ?>"></label>
+        <label for="nome">Início <input type="date" style="background-color:transparent; border: none" value="<?php echo ($dateCad->format('Y-m-d')); ?>"></label>
         <div>
                 <label>Dias Restante: </label>
-                <?php echo (int) $diasRestanteDieta; ?>
+                <?php echo ($tempoLote->d); ?>
         </div>
         <hr>
 
-        <label for="nome">Vacinas: <input type="text" style="background-color:transparent; border: none" disabled value="<?php echo ($lote[0]['nomeVacina']); ?>"></label><br>
-        <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($date->format('Y-m-d')); ?>"></label><br>
-        <hr>
-
-        <label for="nome">Ração Atual: <input type="text" style="background-color:transparent; border: none" disabled value="<?php echo ($lote[0]['nomeDieta']); ?>"></label>
-
+        <?php echo form_open_multipart('Lote/atualizarDieta'); ?>
         <div class="form-group">
+                <input type="hidden" name="idLote" value="<?php echo ($lote[0]['idLote']); ?>">
+                <input type="hidden" name="idTipoTratamento" value="<?php echo ($lote[0]['idTipoTratamento']); ?>">
+                <label for="nome">Dieta Atual</label>
+                <select class="browser-default custom-select" name="idProduto">
+                        <option selected><?php echo ($lote[0]['nomeProduto']); ?></option>
+                        <?php
+                        foreach ($dietas as $r) {
+                                $id = $r['idProduto'];
+                                echo ("<option value='$id'>" . $r['nomeProduto'] . "</option>");
+                        } ?>
+                </select>
 
+                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadDieta->format('Y-m-d')); ?>"></label><br>
+                <label>Dias Restante: </label>
+                <?php echo ($tempoDieta->d); ?><br>
+                <button type="submit" class="btn btn-outline-info">Atualizar</button><br>
         </div>
+        <?php echo form_close(); ?>
+        <hr>
+        <?php echo form_open_multipart('Lote/atualizarVacina'); ?>
+        <div class="form-group">
+                <input type="hidden" name="idLote" value="<?php echo ($lote[0]['idLote']); ?>">
+                <input type="hidden" name="idTipoTratamento" value="<?php echo ($lote[1]['idTipoTratamento']); ?>">
+                <div class="form-group">
+                        <label for="nome">Vacina Atual</label>
+                        <select class="browser-default custom-select" name="idProduto">
+                                <option selected><?php echo ($lote[1]['nomeProduto']); ?></option>
+                                <?php
+                                foreach ($vacinas as $r) {
+                                        $id = $r['idProduto'];
+                                        echo ("<option value='$id'>" . $r['nomeProduto'] . "</option>");
+                                } ?>
+                        </select>
+                </div>
+                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadDieta->format('Y-m-d')); ?>"></label><br>
+                <label>Dias Restante: </label>
+                <?php echo ($tempoVacina->d); ?><br>
+                <button type="submit" class="btn btn-outline-info">Atualizar</button><br>
+        </div>
+        <?php echo form_close(); ?>
 
+        <hr>
+
+        <?php echo form_open_multipart('Lote/atualizarPeso'); ?>
+        <div class="form-group">
+                <input type="hidden" name='idLote' value="<?php echo ($lote[0]['idLote']); ?>">
+                <label for="nome">Peso Atual: <input type="text" name="pesoLote" style="background-color:transparent; border: none" value="<?php echo ($lote[0]['pesoLote']); ?>"></label><br>
+                <button type="submit" class="btn btn-outline-info">Atualizar</button>
+        </div>
+        <?php echo form_close(); ?>
         <div class="container">
                 <table class="table">
                         <thead>
@@ -66,7 +117,7 @@ $diasRestanteDieta = abs((strtotime(($lote[0]['dtCadastroInfo']) . '+60 days') -
                                         <td>" . $r['idSuino'] . "  </td>
                                         <td>" . $sexo . " </td> 
                                         <td>
-                                                <button onclick='exibir($id,$idLoteFull)'>
+                                                <button onclick='exibir($id,$idLote)'>
                                                         <span data-feather='edit'></span>
                                                 </button>
                                         </td>
@@ -99,6 +150,7 @@ $diasRestanteDieta = abs((strtotime(($lote[0]['dtCadastroInfo']) . '+60 days') -
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
                                         <button type="submit" class="btn btn-outline-info">Atualizar</button>
+                                        <button type="submit" class="btn btn-outline-info"></button>
                                 </div>
 
                         </div>
@@ -128,27 +180,18 @@ $diasRestanteDieta = abs((strtotime(($lote[0]['dtCadastroInfo']) . '+60 days') -
         </script>
 
         <script>
-                <!-- chamada padrão do JQuery pelo document.ready 
-                -->
-                $(document).ready(function
-                ()
-                {
-        <!-- listener do botão com o ID do pedido, igual ao que está lá na tag BUTTON -->
-        $("#movLocalidade").click(function () {
-        alert('teste');
-        <!-- o evento click tem um function dentro que fará o trabalho de mostrar ou esconder a div -->
-        <!-- no estado atual capturo se a div está none ou block no momento do click -->
-        estado_atual = $("#alterar").css("display");
-        <!-- se estiver none troca pra block e vice versa -->
-        if (estado_atual == "none") {
-        novo_estado = "block";
-        } else {
-        novo_estado = "none";
-        }
-        <!-- atribui o novo display a div -->
-        $("#alterar").css("display", novo_estado);
-        });
-        })
+                $(document).ready(function() {
+                        $("#movLocalidade").click(function() {
+
+                                estado_atual = $("#alterar").css("display");
+                                if (estado_atual == "none") {
+                                        novo_estado = "block";
+                                } else {
+                                        novo_estado = "none";
+                                }
+                                $("#alterar").css("display", novo_estado);
+                        });
+                })
         </script>
 
         <?php $this->load->view('footer') ?>

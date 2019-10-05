@@ -44,6 +44,10 @@ if(isset($editar))
                 </select>
         </div>
         <div class="form-group">
+                <label for="vencimentoLote">Tempo no Lote</label>
+                <input type="date" class="form-control" id="vencimentoLote" name="vencimentoLote" aria-describedby="tempoUsoHelp" placeholder="Digite a Data Prevista">
+        </div>
+        <div class="form-group">
                 <label for="idDieta">Escolha a dieta</label>
                 <select class="browser-default custom-select" id="idDieta" name="idDieta">
                         <?php
@@ -64,10 +68,6 @@ if(isset($editar))
                 </select>
         </div>
         <div class="form-group">
-                <label for="tempoUso">Tempo de Uso da Dieta</label>
-                <input type="number" class="form-control" id="tempoUso" name="tempoUso" aria-describedby="tempoUsoHelp" placeholder="Digite o tempo de Uso da Dieta">
-        </div>
-        <div class="form-group">
                 
                 <label for="qtdSuinoMacho">Quantidade de Suinos Machos Disponíveis <?php echo($suinoMacho[0]['']);?> </label>
                 <input type="number" class="form-control" id="qtdSuinoMacho" min="0" max="<?php echo($suinoMacho[0]['']);?>" name="qtdSuinoMacho" aria-describedby="qtdSuinoMacho" placeholder="Digite a quantidade de Suinos Machos">
@@ -76,6 +76,11 @@ if(isset($editar))
                 
                 <label for="qtdSuinoFemea">Quantidade de Suinos Femeas Disponíveis <?php echo($suinoFemea[0]['']);?> </label>
                 <input type="number" class="form-control" id="qtdSuinoFemea" min="0" max="<?php echo($suinoFemea[0]['']);?>" name="qtdSuinoFemea" aria-describedby="qtdSuinoFemea" placeholder="Digite a quantidade de Suinos Femeas">
+        </div>
+
+        <div class="form-group">
+                <label for="pesoLote">Peso Total do Lote</label>
+                <input type="number" class="form-control" id="pesoLote" name="pesoLote" value="0" aria-describedby="tempoUsoHelp" placeholder="Digite o Peso do Lote">
         </div>
 
         <div class="form-group">

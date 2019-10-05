@@ -98,12 +98,27 @@ class Suino_Model extends CI_Model
 
 	public function alterarSuino($dados)
 	{
+		var_dump($dados);
 		$idSuino = $dados['idSuino'];
-		$idLoteFullDestino = $dados['idLoteFullDestino'];
-
+		$idLoteDestino = $dados['idLoteDestino'];
 		$query = "		EXEC sp_transferirLoteSuino_sp 
-			@idSuino = $idSuino, 
-			@idLoteFullDestino = $idLoteFullDestino ";
+		 	@idSuino = $idSuino, 
+		 	@idLoteDestino = $idLoteDestino ";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaInformacoesLote($id)
+	{
+		$query = "SELECT * FROM viewResumoDosLotes WHERE idLote = $id";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
+	public function consultaLoteId($id)
+	{
+		$query = " SELECT  L.idSuino as idSuino, S.sexo as sexo, L.idLote as idLote FROM [rlc].loteSuinos as L,[base].suinos AS S
+						WHERE S.idSuino = L.idSuino and L.idLote =  $id";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
