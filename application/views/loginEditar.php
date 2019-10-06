@@ -32,7 +32,7 @@ if(isset($editar))
 
 ?>
 <!-- Aqui vai o conteúdo -->
-<script type='text/javascript' src="application\views\assets\js\produto.js"></script>
+<!--  <script type='text/javascript' src="application\views\assets\js\produto.js"></script>  -->
 <h2>Tela de Alteração de Usuário: <?php echo getUserName() ?></h2>
 <?php echo form_open_multipart('login/loginAtualizar'); ?>
 

@@ -81,17 +81,18 @@ class Suino_Model extends CI_Model
 
 	public function consultaLote()
 	{
-		$query = "SELECT DISTINCT L.idLoteFull, nomeLote FROM [controle].lotes as L,[controle].informacoesLote AS IL
-					WHERE IL.idLoteFull = L.idLoteFull";
+		$query = "SELECT DISTINCT idLote, nome as  nomeLote FROM [controle].lotes";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
 	public function consultaLoteFemea()
 	{
-		$query = "SELECT L.idSuino FROM controle.lotes  AS L
-					INNER JOIN [base].suinos AS S ON (S.idSuino = L.idSuino)
-						WHERE L.idTipoLote = 2 ";
+		$query = "SELECT L.idSuino
+		FROM rlc.loteSuinos L
+			INNER JOIN [base].suinos AS S ON(S.idSuino = L.idSuino)
+			INNER JOIN controle.lotes AS cl on cl.idLote = L.idLote
+		WHERE cl.idTipoLote = 2";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
