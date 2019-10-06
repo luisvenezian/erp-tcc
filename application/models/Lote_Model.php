@@ -84,7 +84,7 @@ class Lote_Model extends CI_Model
 					@dtFimAplicacaoVacina = '$validadeVacina',
 					@qtdMacho = $qtdMacho,
 					@qtdFemea = $qtdFemea,
-					@desc = $descricao,
+					@desc = '$descricao',
 					@idUsuario = $idUsuario,
 					@peso = $pesoLote
 		";

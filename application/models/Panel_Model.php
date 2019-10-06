@@ -8,4 +8,11 @@ class Panel_Model extends CI_Model {
 		parent::__construct();
 	}
 
+
+	function getDadosAlocacaoSuino()
+	{
+		$query = $this->db->query("SELECT * FROM dbo.viewResumoDaAlocacaoDosPorcosPivotada");
+		return $query->Result();
+	}
+
 }

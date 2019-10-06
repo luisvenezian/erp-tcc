@@ -14,8 +14,11 @@ class Panel extends CI_Controller {
 		if (verify_logged() <> true){
 			redirect('login','refresh');
 		}
-		else{
-			$this->load->view('panel');
+		else{	
+
+			$dados = array("alocacoes" => $this->bd->getDadosAlocacaoSuino());
+			$this->load->view('panel', $dados);
+			
 		}
 	}
 }
