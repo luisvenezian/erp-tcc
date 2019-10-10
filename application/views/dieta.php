@@ -5,7 +5,6 @@ $this->load->view('header', $data);
 if(isset($editar))
 {
         ?> <script type='text/javascript' src=<?=base_url('application\views\assets\js\produto.js')?>></script> <?php 
-
         if ($editar == 2)
         {
                 ?>
@@ -23,7 +22,6 @@ if(isset($editar))
                 <script>
                 SwalSqlEditado('erro');
                 </script>
-
                 <?php 
         }
 }

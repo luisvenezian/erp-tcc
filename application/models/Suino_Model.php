@@ -97,9 +97,8 @@ class Suino_Model extends CI_Model
 		return $query->result_array();
 	}
 
-	public function alterarSuino($dados)
+	public function alterarSuinoLocalidade($dados)
 	{
-		var_dump($dados);
 		$idSuino = $dados['idSuino'];
 		$idLoteDestino = $dados['idLoteDestino'];
 		$query = "		EXEC sp_transferirLoteSuino_sp 
@@ -109,17 +108,38 @@ class Suino_Model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function alterarSuinoMorte($dados)
+	{
+		$idSuino = $dados['idSuino'];
+		$descMorte = $dados['descMorte'];
+		$dataAtual = new DateTime();
+		$dataAtual = $dataAtual->format('Y-m-d');
+		$query = "EXEC sp_informarMorteSuino 
+					@idSuino = '$idSuino', 
+					@dataObito = '$dataAtual', 
+					@msg = '$descMorte'";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
 	public function consultaInformacoesLote($id)
 	{
-		$query = "SELECT * FROM viewResumoDosLotes WHERE idLote = $id";
+		$query = "EXEC sp_resumoDoLote @idLote = $id";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
 	public function consultaLoteId($id)
 	{
-		$query = " SELECT  L.idSuino as idSuino, S.sexo as sexo, L.idLote as idLote FROM [rlc].loteSuinos as L,[base].suinos AS S
-						WHERE S.idSuino = L.idSuino and L.idLote =  $id";
+		$query = " SELECT L.idSuino AS idSuino, 
+						S.sexo AS sexo, 
+						L.idLote AS idLote
+				FROM [rlc].loteSuinos AS L, 
+					[base].suinos AS S
+				WHERE S.idSuino = L.idSuino
+					AND L.idLote = $id
+					AND L.dtSaidaSuino IS NULL
+				ORDER BY L.idSuino";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}

@@ -100,7 +100,7 @@ class Lote_Model extends CI_Model
 	public function consultaLote()
 	{
 		$query = "SELECT DISTINCT L.idLote, L.nome as nomeLote FROM [controle].lotes as L,[rlc].loteSuinos AS IL
-		WHERE IL.idLote = L.idLote";
+		WHERE IL.idLote = L.idLote ";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
@@ -108,14 +108,14 @@ class Lote_Model extends CI_Model
 	public function consultaLoteId($id)
 	{
 		$query = " SELECT L.idSuino AS idSuino, 
-						S.sexo AS sexo, 
-						L.idLote AS idLote
-				FROM [rlc].loteSuinos AS L, 
-					[base].suinos AS S
-				WHERE S.idSuino = L.idSuino
-					AND L.idLote = $id
-					AND L.dtSaidaSuino IS NULL
-				ORDER BY L.idSuino";
+		S.sexo AS sexo, 
+				L.idLote AS idLote
+		FROM [rlc].loteSuinos AS L, 
+			[base].suinos AS S
+		WHERE S.idSuino = L.idSuino
+			AND L.idLote = $id
+			AND L.dtSaidaSuino IS NULL
+		ORDER BY L.idSuino";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
@@ -147,8 +147,8 @@ class Lote_Model extends CI_Model
 
 	public function consultaLoteAlterarSuino($id)
 	{
-		$query = "SELECT DISTINCT idLote, nomeLote FROM [controle].informacoesLote AS IL
-					WHERE not idLote =  $id";
+		$query = "SELECT DISTINCT idLote, nome FROM [controle].lotes AS L
+					WHERE not idLote =   $id";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
@@ -227,11 +227,22 @@ class Lote_Model extends CI_Model
 
 	function consultaVacinaId($id)
 	{
-		
+
 		$query = "SELECT validade FROM [base].[produtos] where [idProduto] = $id";
 		$query = $this->db->query($query);
 		return $query->row(1);
 	}
 
-
+	function finalizarLote($dados)
+	{
+		$idLote = $dados['idLote'];
+		$valor = $dados['valorVenda'];
+		$cliente = $dados['clienteVenda'];
+		$query = "EXEC sp_finalizarLoteCompleto 
+					@idLote = '$idLote', 
+					@valor = '$valor', 
+					@cliente = '$cliente'";
+		$query = $this->db->query($query);
+		return True;
+	}
 }

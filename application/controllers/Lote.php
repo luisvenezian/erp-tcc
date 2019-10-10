@@ -123,4 +123,19 @@ class Lote extends CI_Controller
         $this->load->view('loteEditar', $dados);
     }
 
+    public function finalizarLote(){
+        $dados_do_formulario = $this->input->post();
+        $dados = array("lote" => $this->bd->consultaLote());
+        $this->load->view('lote', $dados);
+    }
+
+    public function formVenda(){
+        
+        $id = $this->input->post('idLote');
+        $dados = array(
+            "lote" => $this->bd->consultaInformacoesLote($id)
+        );
+        $this->load->view('formVenda', $dados);
+    }
+
 }

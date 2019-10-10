@@ -45,6 +45,7 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                 <label>Dias Restante: </label>
                 <?php echo ($tempoLote->d); ?>
         </div>
+        <label for="nome">Mortes: <?php echo ($lote[0]['nome']); ?></label><br>
         <hr>
 
         <?php echo form_open_multipart('Lote/atualizarDieta'); ?>
@@ -68,7 +69,8 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
         </div>
         <?php echo form_close(); ?>
         <hr>
-        <?php echo form_open_multipart('Lote/atualizarVacina'); ?>
+        <?php echo form_open_multipart('Lote/atualizarVacina
+        '); ?>
         <div class="form-group">
                 <input type="hidden" name="idLote" value="<?php echo ($lote[0]['idLote']); ?>">
                 <input type="hidden" name="idTipoTratamento" value="<?php echo ($lote[1]['idTipoTratamento']); ?>">
@@ -127,6 +129,10 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                                 ?>
                         </tbody>
                 </table>
+                <div class="form-group">
+                        <input type="hidden" name="idLote" value="<?php $idLote =  ($lote[0]['idLote']); echo $idLote ?>">
+                        <button  class = "btn btn-outline-info" onclick='exibirVenda(<?php echo $idLote?>)'> Finalizar Venda</button>
+                </div>
         </div>
 
         <?php echo form_open_multipart('suino/suinosAlterar'); ?>
@@ -150,7 +156,6 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
                                         <button type="submit" class="btn btn-outline-info">Atualizar</button>
-                                        <button type="submit" class="btn btn-outline-info"></button>
                                 </div>
 
                         </div>
@@ -159,6 +164,34 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
         </div>
         <?php echo form_close(); ?>
 
+        <?php echo form_open_multipart('lote/finalizarLote'); ?>
+        <div id="visulUsuarioModalVenda" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+
+                        <div class="modal-content">
+
+                                <div class="modal-header">
+                                        <h5 class="modal-title" id="visulUsuarioModalLabel">Detalhes da Venda</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                </div>
+                                <div class="modal-body">
+
+                                        <span id="visul_usuarioVenda"></span>
+
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-outline-info">Finalizar</button>
+                                </div>
+
+                        </div>
+
+                </div>
+        </div>
+        <?php echo form_close(); ?>
         <script>
                 function exibir(id, idLote) {
                         $.ajax({
@@ -173,6 +206,23 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                                 .done(function(msg) {
                                         $("#visul_usuario").html(msg);
                                         $('#visulUsuarioModal').modal('show');
+                                });
+                }
+        </script>
+
+        <script>
+                function exibirVenda(idLote) {
+                        $.ajax({
+                                        url: '<?php echo base_url('lote/formVenda'); ?>',
+                                        crossDomain: true,
+                                        type: 'POST',
+                                        data: {
+                                                idLote: idLote
+                                        }
+                                })
+                                .done(function(msg) {
+                                        $("#visul_usuarioVenda").html(msg);
+                                        $('#visulUsuarioModalVenda').modal('show');
                                 });
                 }
         </script>

@@ -3,7 +3,7 @@ $data['controller'] = "lote";
 $this->load->view('header',$data);
 if(isset($editar))
 {
-        ?> <script type='text/javascript' src=<?=base_url('application\views\assets\js\produto.js')?>></script> <?php 
+        ?> <script type='text/javascript' src=<?=base_url('application\views\assets\js\lote.js')?>></script> <?php 
 
         if ($editar == 2)
         {

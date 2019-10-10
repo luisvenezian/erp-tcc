@@ -48,12 +48,31 @@ class Suino extends CI_Controller
     public function suinosAlterar()
     {
         $dados_do_formulario = $this->input->post();
-        $id = $this->input->post('idLoteDestino');
-        var_dump($this->input->post());
-        $this->bd->alterarSuino($dados_do_formulario);
-        $data['editar'] = 2;
-        $dados = array("suino" => $this->bd->consultaLoteId($id),
-                       "lote" => $this->bd->consultaInformacoesLote($id)); 
-        $this->load->view('loteEditar', $dados);
+        if (!empty($dados_do_formulario['descMorte']) & ($dados_do_formulario['idLoteDestino']) == 'null') {
+            $dados_do_formulario = $this->input->post();
+            $this->bd->alterarSuinoMorte($dados_do_formulario);
+            $dados = array(
+                "suino" => $this->bd->consultaLoteId($dados_do_formulario['idLote']),
+                "lote" => $this->bd->consultaInformacoesLote($dados_do_formulario['idLote'])
+            );
+            $this->load->view('loteEditar', $dados);
+        } else if (!empty($dados_do_formulario['idLoteDestino']) & empty($dados_do_formulario['descMorte'])) {
+            $id = $this->input->post('idLoteDestino');
+            $this->bd->alterarSuinoLocalidade($dados_do_formulario);
+            $dados = array(
+                 "suino" => $this->bd->consultaLoteId($dados_do_formulario['idLote']),
+                 "lote" => $this->bd->consultaInformacoesLote($dados_do_formulario['idLote'])
+            );
+            $this->load->view('loteEditar', $dados);
+        } else {
+            $id = $this->input->post('idLoteDestino');
+            $this->bd->alterarSuinoLocalidade($dados_do_formulario);
+            $this->bd->alterarSuinoMorte($dados_do_formulario);
+            $dados = array(
+                "suino" => $this->bd->consultaLoteId($id),
+                "lote" => $this->bd->consultaInformacoesLote($id)
+            );
+            $this->load->view('loteEditar', $dados);
+        }
     }
 }
