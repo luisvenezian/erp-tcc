@@ -128,12 +128,14 @@
                 href=<?php echo base_url('login/editar') ?>>Editar</a>
               </div>
             </li>
+            <!--
             <li class="nav-item">
-              <a <?php echo getNavLinkType('executarsql', $controller); ?> href="\executarsql">
+              <a <echo getNavLinkType('executarsql', $controller); ?> href="\executarsql">
                 <span data-feather="database"></span>
                 Executar SQL
               </a>
             </li>
+-->
           </ul>
           <!-- 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

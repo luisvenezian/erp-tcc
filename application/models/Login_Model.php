@@ -49,4 +49,15 @@ class Login_Model extends CI_Model {
 	}
 
 
+	public function cadastrarSenhaUsuario($dados)
+	{
+		$senha = $dados['senha'];
+		$usuario = $dados['usuario'];
+
+
+		$command_sql = "INSERT base.usuarios (usuario, senha, dtCadastro)
+						VALUES ('".$usuario."','".$senha."', GETDATE())";
+
+		return ($this->db->query($command_sql)) ? true : false;
+	}
 }

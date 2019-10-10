@@ -66,6 +66,11 @@ class Login extends CI_Controller {
 	{	
 		$this->load->view('loginEditar');
 	}
+
+	public function cadastrar()
+	{	
+		$this->load->view('loginCadastrar');
+	}
 	
 	public function loginAtualizar()
 	{	
@@ -81,6 +86,23 @@ class Login extends CI_Controller {
 		}
 
 		$this->load->view('loginEditar', $data);
+	}
+
+	public function loginCadastrar()
+	{
+		$dados_do_formulario = $this->input->post(); 
+
+		if($this->bd->cadastrarSenhaUsuario($dados_do_formulario))
+		{
+			$data['editar'] = 2;
+		}
+		else 
+		{
+			$data['editar'] = 3;
+		}
+
+		$this->load->view('loginCadastrar', $data);
+
 	}
 	
 }
