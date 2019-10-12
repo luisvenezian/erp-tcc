@@ -9,6 +9,8 @@ $qtdRecria =  $alocacoes[0]->qtdRecria;
 $qtdPosDesmama =  $alocacoes[0]->qtdPosDesmama;
 $qtdPreAbate =  $alocacoes[0]->qtdPreAbate;
 
+$qtdFemeasDisponiveis = $qtd[0]->qtdFemea;
+$qtdMachosDisponiveis = $qtd[0]->qtdMacho;
 
 
 ?>
@@ -48,6 +50,7 @@ $qtdPreAbate =  $alocacoes[0]->qtdPreAbate;
                 </div>
 
                 <div class="col-sm">
+                        <div id="container2"></div>
                 </div>
         </div>
         
@@ -127,5 +130,52 @@ $qtdPreAbate =  $alocacoes[0]->qtdPreAbate;
         }]
         });
 
+
+        Highcharts.chart('container2', {
+        chart: {
+                type: 'column'
+        },
+        title: {
+                text: 'Suinos por Sexo'
+        },
+        subtitle: {
+                text: 'Considera todos suinos vivos que não estão em lotes'
+        },
+        xAxis: {
+                categories: [
+                'Criações'
+                ],
+                crosshair: true
+        },
+        yAxis: {
+                min: 0,
+                title: {
+                text: 'Quantidade'
+                }
+        },
+        tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+        },
+        plotOptions: {
+                column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+                }
+        },
+        series: [{
+                name: 'Machos',
+                data: [<?php echo $qtdMachosDisponiveis ?>]
+
+        }, {
+                name: 'Fêmeas',
+                data: [<?php echo $qtdFemeasDisponiveis ?>]
+
+        }]
+        });
         </script>
 <?php $this->load->view('footer') ?>

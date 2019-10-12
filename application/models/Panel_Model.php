@@ -15,4 +15,13 @@ class Panel_Model extends CI_Model {
 		return $query->Result();
 	}
 
+
+
+	function getDadosSuinoDisponiveis()
+	{
+		$query = $this->db->query("SELECT * FROM dbo.viewEstoqueSuinosPivotada");
+		return $query->Result();
+	}
+	
+
 }

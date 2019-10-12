@@ -16,7 +16,8 @@ class Panel extends CI_Controller {
 		}
 		else{	
 
-			$dados = array("alocacoes" => $this->bd->getDadosAlocacaoSuino());
+			$dados = array("alocacoes" => $this->bd->getDadosAlocacaoSuino(),
+						   "qtd" => $this->bd->getDadosSuinoDisponiveis());
 			$this->load->view('panel', $dados);
 			
 		}
