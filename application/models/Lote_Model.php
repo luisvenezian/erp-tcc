@@ -11,14 +11,16 @@ class Lote_Model extends CI_Model
 
 	function consultaDieta()
 	{
-		$query = "SELECT [idProduto],[nomeProduto],[validade] FROM [base].[produtos] where [ganhoPeso] IS NOT NULL";
+		$query = "SELECT P.[idProduto],P.[nomeProduto],P.[validade],VP.[qtdDisponivel] FROM [base].[produtos] as P,[viewSaldoAtualProduto] as VP
+		WHERE P.[ganhoPeso] IS NOT NULL AND VP.idProduto = P.idProduto AND VP.qtdDisponivel > 0";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
 
 	function consultaVacina()
 	{
-		$query = "SELECT [idProduto],[nomeProduto],[validade] FROM [base].[produtos] where [localAPlicacao] IS NOT NULL";
+		$query = "SELECT P.[idProduto],P.[nomeProduto],P.[validade],VP.[qtdDisponivel] FROM [base].[produtos] as P,[viewSaldoAtualProduto] as VP
+		where P.[localAplicacao] IS NOT NULL AND VP.idProduto = P.idProduto AND VP.qtdDisponivel > 0";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
@@ -71,6 +73,8 @@ class Lote_Model extends CI_Model
 		$vencimentoLote = ($vencimentoLote->format('Y-m-d h:m:s'));
 		$dataAtual = new DateTime();
 		$dataAtual = $dataAtual->format('Y-m-d');
+		$qtdDieta = $dados['qtdDieta'];
+		$qtdVacina = $dados['qtdVacina'];
 		$query = "
 					exec sp_cadastrarLote 
 					@Nome = '$nome',
@@ -86,7 +90,9 @@ class Lote_Model extends CI_Model
 					@qtdFemea = $qtdFemea,
 					@desc = '$descricao',
 					@idUsuario = $idUsuario,
-					@peso = $pesoLote
+					@peso = $pesoLote,
+					@qtdVacina = $qtdDieta,
+					@qtdDieta = $qtdVacina
 		";
 		try {
 			$query = $this->db->query($query);
@@ -100,7 +106,7 @@ class Lote_Model extends CI_Model
 	public function consultaLote()
 	{
 		$query = "SELECT DISTINCT L.idLote, L.nome as nomeLote FROM [controle].lotes as L,[rlc].loteSuinos AS IL
-		WHERE IL.idLote = L.idLote ";
+		WHERE IL.idLote = L.idLote AND L.idTipoLote != 5";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
@@ -153,6 +159,14 @@ class Lote_Model extends CI_Model
 		return $query->result_array();
 	}
 
+	public function consultaLoteAlterarLote($id)
+	{
+		$query = "SELECT DISTINCT idLote, nome FROM [controle].lotes AS L
+					WHERE not idLote =   $id";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
+
 	public function alterarPeso($dados)
 	{
 		$idUsuario = $dados['idUsuario'];
@@ -163,11 +177,11 @@ class Lote_Model extends CI_Model
 		,[idUsuario]
 		,[dtPesagem]
 		,[pesoG])
-  VALUES
-		('$idLote'
-		,'$idUsuario'
-		,GETDATE()
-		,$peso)";
+		VALUES
+				('$idLote'
+				,'$idUsuario'
+				,GETDATE()
+				,$peso)";
 		$query = $this->db->query($query);
 		return True;
 	}
@@ -179,6 +193,7 @@ class Lote_Model extends CI_Model
 		$idTipoTratamento = $dados['idTipoTratamento'];
 		$idProduto = $dados['idProduto'];
 		$validade = $dados['validade'];
+		$qtd = $dados['qtdDieta'];
 		$query = "INSERT INTO [controle].[tratamentosLote]
 		([idLote]
 		,[idProduto]
@@ -192,6 +207,10 @@ class Lote_Model extends CI_Model
 		,GETDATE()
 		,'$validade')";
 		$query = $this->db->query($query);
+		$query = $this->db->query("EXEC sp_lancarSaidaNoEstoque 
+									@idProduto = $idProduto, 
+									@Qtd = $qtd, 
+									@idUsuario = $idUsuario");
 		return True;
 	}
 
@@ -202,6 +221,7 @@ class Lote_Model extends CI_Model
 		$idTipoTratamento = $dados['idTipoTratamento'];
 		$idProduto = $dados['idProduto'];
 		$validade = $dados['validade'];
+		$qtd = $dados['qtdVacina'];
 		$query = "INSERT INTO [controle].[tratamentosLote]
 		([idLote]
 		,[idProduto]
@@ -215,6 +235,10 @@ class Lote_Model extends CI_Model
 		,GETDATE()
 		,'$validade')";
 		$query = $this->db->query($query);
+		$query = $this->db->query("EXEC sp_lancarSaidaNoEstoque 
+									@idProduto = $idProduto, 
+									@Qtd = $qtd, 
+									@idUsuario = $idUsuario");
 		return True;
 	}
 
@@ -242,6 +266,16 @@ class Lote_Model extends CI_Model
 					@idLote = '$idLote', 
 					@valor = '$valor', 
 					@cliente = '$cliente'";
+		$query = $this->db->query($query);
+		return True;
+	}
+
+	public function movimentacaoLote($dados){
+		$idLote = $dados['idLote'];
+		$idLoteDestino = $dados['idLoteDestino'];
+		$query = "exec sp_transferirLote
+					@idLoteOrigem = $idLote,
+					@idLoteDestino = $idLoteDestino";
 		$query = $this->db->query($query);
 		return True;
 	}

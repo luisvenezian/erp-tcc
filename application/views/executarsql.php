@@ -81,4 +81,8 @@ $this->load->view('header',$data)
         }       
         ?>
 
+        <script>
+                $.ajax
+        </script>
+
 <?php $this->load->view('footer') ?>

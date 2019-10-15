@@ -113,11 +113,14 @@
                 Lotes
               </a>
             </li>
-            <li class="nav-item">
-              <a <?php echo getNavLinkType('relatorio', $controller); ?> href="\relatorio">
-                <span data-feather="bar-chart-2"></span>
-                Relatórios
-              </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('relatorios', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="bar-chart-2"></span>Relatórios</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" <?php echo getNavLinkType('Relatorio/peso', $controller); ?> 
+                href=<?php echo base_url('relatorio/peso') ?>>Pesos</a>
+                <a class="dropdown-item" <?php echo getNavLinkType('Relatorio/venda', $controller); ?> 
+                href=<?php echo base_url('relatorio/venda') ?>>Dietas</a>
+              </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" <?php echo getNavLinkType('produto', $controller); ?> href="#" role="button" aria-haspopup="true" aria-expanded="false"><span data-feather="user"></span>Usuário</a>

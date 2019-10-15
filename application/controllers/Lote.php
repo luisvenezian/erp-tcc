@@ -44,8 +44,8 @@ class Lote extends CI_Controller
     public function cadastroLotes()
     {
         $dados = array(
-            "dieta" => $this->bd->consultaDieta(),
-            "vacina" => $this->bd->consultaVacina(),
+            "dietas" => $this->bd->consultaDieta(),
+            "vacinas" => $this->bd->consultaVacina(),
             "tipoLote" => $this->bd->consultaTipoLote(),
             "suinoMacho" => $this->bd->consultaSuinoMacho(),
             "suinoFemea" => $this->bd->consultaSuinoFemea()
@@ -94,19 +94,16 @@ class Lote extends CI_Controller
 
     public function atualizarDieta()
     {
+        $dados_do_formulario = $this->input->post();    
         $id = $this->input->post('idLote');
-        $dados_do_formulario = $this->input->post();        
-        $dados_do_formulario['validade'] = $this->bd->consultaDietaId($this->input->post('idProduto'))->validade;
+        $dados_do_formulario['validade'] = $this->bd->consultaDietaId($this->input->post('idProduto'))->validade;    
         $dados_do_formulario['idUsuario']  = $this->usuario->getUserIdByUserName(getUserName());
-        $this->bd->alterarDieta($dados_do_formulario);
+        $this->bd->alterarVacina($dados_do_formulario);
         $dados = array(
-            "suino" => $this->bd->consultaLoteId($id),            
-            "lote" => $this->bd->consultaInformacoesLote($id),
-            "vacinas" => $this->bd->consultaVacina(),
-            "dietas" => $this->bd->consultaDieta()
+            "suino" => $this->bd->consultaLoteId($id),
+            "lote" => $this->bd->consultaInformacoesLote($id)
         );
-        $this->load->view('loteEditar', $dados);
-        
+        $this->load->view('loteEditar', $dados);        
     }
 
     public function atualizarVacina()
@@ -125,6 +122,7 @@ class Lote extends CI_Controller
 
     public function finalizarLote(){
         $dados_do_formulario = $this->input->post();
+        $this->bd->finalizarLote($dados_do_formulario);
         $dados = array("lote" => $this->bd->consultaLote());
         $this->load->view('lote', $dados);
     }
@@ -138,4 +136,22 @@ class Lote extends CI_Controller
         $this->load->view('formVenda', $dados);
     }
 
+    public function movimentarLote(){
+        $idlote = $this->input->post('idLote');
+        $dados = array(
+            "lote" => $this->bd->consultaLoteAlterarSuino($idlote)
+        );
+        $this->load->view('movimentarLote', $dados);
+    }
+
+    public function movimentacaoLote(){
+        $dados_do_formulario = $this->input->post();
+        $this->bd->movimentacaoLote($dados_do_formulario);
+        $id = $dados_do_formulario['idLoteDestino'];
+        $dados = array(
+            "suino" => $this->bd->consultaLoteId($id),
+            "lote" => $this->bd->consultaInformacoesLote($id)
+        );
+        $this->load->view('loteEditar', $dados);        
+    }
 }

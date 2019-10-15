@@ -67,9 +67,14 @@ class Suino_Model extends CI_Model
 		$idUsuario = $dados['idUsuario'];
 		$idMae = $dados['idMae'];
 		$idLoteFull = $dados['idLoteFull'];
-
-		$command_sql = "EXEC sp_cadastrarSuino '" . $qtd . "','" . $peso . "','" . $idUsuario . "','" . $sexo . "','" . $dt . "'";
-
+		$command_sql = "EXEC sp_cadastrarSuino
+							@qtd = $qtd,
+							@peso = $peso,
+							@idUsuario = $idUsuario,
+							@sexo = $sexo,
+							@dtNascimento = '$dt',
+							@idMae = $idMae,
+							@idLote = $idLoteFull";
 		try {
 			$this->db->query($command_sql);
 			$valida = true;

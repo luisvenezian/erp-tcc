@@ -50,7 +50,7 @@ if (isset($editar)) {
                 <option value='null' selected>Selecione um Lote</option>
                 <?php
                 foreach ($lote as $r) {
-                        $id = $r['idLoteFull'];
+                        $id = $r['idLote'];
                         echo ("<option value='$id'>" . $r['nomeLote'] . "</option>");
                 } ?>
         </select>

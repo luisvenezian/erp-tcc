@@ -45,24 +45,25 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                 <label>Dias Restante: </label>
                 <?php echo ($tempoLote->d); ?>
         </div>
-        <label for="nome">Mortes: <?php echo ($lote[0]['nome']); ?></label><br>
+        <label for="nome">Mortes: <?php echo ($lote[0]['qtdMortos']); ?></label><br>
         <hr>
 
         <?php echo form_open_multipart('Lote/atualizarDieta'); ?>
         <div class="form-group">
                 <input type="hidden" name="idLote" value="<?php echo ($lote[0]['idLote']); ?>">
                 <input type="hidden" name="idTipoTratamento" value="<?php echo ($lote[0]['idTipoTratamento']); ?>">
-                <label for="nome">Dieta Atual</label>
-                <select class="browser-default custom-select" name="idProduto">
+                <label for="qtdDieta">Dieta Atual</label>
+                <select class="browser-default custom-select" id="dieta" name="idProduto">
                         <option selected><?php echo ($lote[0]['nomeProduto']); ?></option>
                         <?php
                         foreach ($dietas as $r) {
                                 $id = $r['idProduto'];
-                                echo ("<option value='$id'>" . $r['nomeProduto'] . "</option>");
+                                echo ("<option value='$id'>" . $r['nomeProduto'] . " - " . $r['qtdDisponivel'] . "</option>");
                         } ?>
                 </select>
-
-                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadDieta->format('Y-m-d')); ?>"></label><br>
+                <label for="qtdDieta">Quantidade</label>
+                <input type="number" id="qtdDieta" name="qtdDieta" class="form-control"><br>
+                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadDieta->format('Y-m-d')); ?>"> </label><br>
                 <label>Dias Restante: </label>
                 <?php echo ($tempoDieta->d); ?><br>
                 <button type="submit" class="btn btn-outline-info">Atualizar</button><br>
@@ -76,16 +77,18 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                 <input type="hidden" name="idTipoTratamento" value="<?php echo ($lote[1]['idTipoTratamento']); ?>">
                 <div class="form-group">
                         <label for="nome">Vacina Atual</label>
-                        <select class="browser-default custom-select" name="idProduto">
+                        <select class="browser-default custom-select" id="vacina" name="idProduto">
                                 <option selected><?php echo ($lote[1]['nomeProduto']); ?></option>
                                 <?php
                                 foreach ($vacinas as $r) {
                                         $id = $r['idProduto'];
-                                        echo ("<option value='$id'>" . $r['nomeProduto'] . "</option>");
+                                        echo ("<option value='$id'>" . $r['nomeProduto'] . " - " . $r['qtdDisponivel'] . "</option>");
                                 } ?>
                         </select>
                 </div>
-                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadDieta->format('Y-m-d')); ?>"></label><br>
+                <label for="nome">Quantidade</label>
+                <input type="number" id="qtdVacina" name="qtdVacina" class="form-control"><br>
+                <label for="nome">Início <input type="date" style="background-color:transparent; border: none" disabled value="<?php echo ($dateCadVacina->format('Y-m-d')); ?>"></label><br>
                 <label>Dias Restante: </label>
                 <?php echo ($tempoVacina->d); ?><br>
                 <button type="submit" class="btn btn-outline-info">Atualizar</button><br>
@@ -130,9 +133,19 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                         </tbody>
                 </table>
                 <div class="form-group">
-                        <input type="hidden" name="idLote" value="<?php $idLote =  ($lote[0]['idLote']); echo $idLote ?>">
-                        <button  class = "btn btn-outline-info" onclick='exibirVenda(<?php echo $idLote?>)'> Finalizar Venda</button>
+                        <input type="hidden" name="idLote" value="<?php $idLote = ($lote[0]['idLote']);
+                                                                        echo $idLote ?>">
+                        <button class="btn btn-outline-info" onclick='movimentarLote(<?php echo $idLote ?>)'>Movimentar em Grupo</button>
                 </div>
+                <?php
+
+                if ($lote[0]['nome'] == 'Pré-abate') { ?>
+                        <div class="form-group">
+                                <input type="hidden" name="idLote" value="<?php $idLote = ($lote[0]['idLote']);
+                                                                                        echo $idLote ?>">
+                                <button class="btn btn-outline-info" onclick='exibirVenda(<?php echo $idLote ?>)'> Finalizar Venda</button>
+                        </div>
+                <?php } ?>
         </div>
 
         <?php echo form_open_multipart('suino/suinosAlterar'); ?>
@@ -162,9 +175,12 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
 
                 </div>
         </div>
-        <?php echo form_close(); ?>
+        <?php
+        echo form_close();
 
-        <?php echo form_open_multipart('lote/finalizarLote'); ?>
+        echo form_open_multipart('lote/finalizarLote'); ?>
+        
+        <input type="hidden" name="idLote" value='<?php echo $idLote ?>'>
         <div id="visulUsuarioModalVenda" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
 
@@ -185,6 +201,36 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
                                         <button type="submit" class="btn btn-outline-info">Finalizar</button>
+                                </div>
+
+                        </div>
+
+                </div>
+        </div>
+        <?php echo form_close();
+
+        echo form_open_multipart('lote/movimentacaoLote'); ?>
+        <input type="hidden" name="idLote" value='<?php echo $idLote ?>'>
+        <div id="visulUsuarioModalMovimenta" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+
+                        <div class="modal-content">
+
+                                <div class="modal-header">
+                                        <h5 class="modal-title" id="visulUsuarioModalLabel">Detalhes da Venda</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                        </button>
+
+                                </div>
+                                <div class="modal-body">
+
+                                        <span id="visul_usuarioMovimenta"></span>
+
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-outline-info">Atualizar</button>
                                 </div>
 
                         </div>
@@ -228,16 +274,44 @@ $tempoVacina = date_diff($dateCadVacina, $dateVencVacina);
         </script>
 
         <script>
+                function movimentarLote(idLote) {
+                        $.ajax({
+                                        url: '<?php echo base_url('lote/movimentarLote'); ?>',
+                                        crossDomain: true,
+                                        type: 'POST',
+                                        data: {
+                                                idLote: idLote
+                                        }
+                                })
+                                .done(function(msg) {
+                                        $("#visul_usuarioMovimenta").html(msg);
+                                        $('#visulUsuarioModalMovimenta').modal('show');
+                                });
+                }
+        </script>
+
+        <script>
                 $(document).ready(function() {
                         $("#movLocalidade").click(function() {
 
-                                estado_atual = $("#alterar").css("display");
-                                if (estado_atual == "none") {
-                                        novo_estado = "block";
-                                } else {
-                                        novo_estado = "none";
-                                }
-                                $("#alterar").css("display", novo_estado);
+                        });
+                })
+        </script>
+
+        <script>
+                $(document).ready(function() {
+                        $("#vacina").click(function() {
+                                var teste = $("#vacina :selected").text().split('-');
+                                $("#qtdVacina").attr(parseInt(teste[1]));
+                        });
+                })
+        </script>
+
+        <script>
+                $(document).ready(function() {
+                        $("#dieta").click(function() {
+                                var teste = $("#dieta :selected").text().split('-');
+                                $("#qtdDieta").attr("max", parseInt(teste[1]));
                         });
                 })
         </script>

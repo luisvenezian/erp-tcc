@@ -38,10 +38,9 @@ class Suino extends CI_Controller
     {
         $dados_do_formulario = $this->input->post();
         $dados_do_formulario['idUsuario'] =  $this->usuario->getUserIdByUserName(getUserName());
-
         if ($this->bd->gravarSuinos($dados_do_formulario)) {
             $data['editar'] = 2;
-            $this->load->view('cadastroDietas', $data);
+            $this->load->view('cadastroSuinos', $data);
         }
     }
 
