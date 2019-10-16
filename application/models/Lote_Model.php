@@ -105,8 +105,7 @@ class Lote_Model extends CI_Model
 
 	public function consultaLote()
 	{
-		$query = "SELECT DISTINCT L.idLote, L.nome as nomeLote FROM [controle].lotes as L,[rlc].loteSuinos AS IL
-		WHERE IL.idLote = L.idLote AND L.idTipoLote != 5";
+		$query = "SELECT * FROM viewLotes";
 		$query = $this->db->query($query);
 		return $query->result_array();
 	}
