@@ -37,6 +37,7 @@ class Lote extends CI_Controller
                 "suinoFemea" => $this->bd->consultaSuinoFemea(),
                 'editar' => 2
             );
+            $this->cadastroLotes();
             $this->load->view('cadastroLote', $dados);
         }
     }
@@ -50,6 +51,7 @@ class Lote extends CI_Controller
             "suinoMacho" => $this->bd->consultaSuinoMacho(),
             "suinoFemea" => $this->bd->consultaSuinoFemea()
         );
+
         $this->load->view('cadastroLote', $dados);
     }
 
@@ -98,12 +100,12 @@ class Lote extends CI_Controller
         $id = $this->input->post('idLote');
         $dados_do_formulario['validade'] = $this->bd->consultaDietaId($this->input->post('idProduto'))->validade;    
         $dados_do_formulario['idUsuario']  = $this->usuario->getUserIdByUserName(getUserName());
-        $this->bd->alterarVacina($dados_do_formulario);
+        $this->bd->alterarDieta($dados_do_formulario);
         $dados = array(
             "suino" => $this->bd->consultaLoteId($id),
             "lote" => $this->bd->consultaInformacoesLote($id)
         );
-        $this->load->view('loteEditar', $dados);        
+        $this->load->view('loteEditar', $dados);       
     }
 
     public function atualizarVacina()

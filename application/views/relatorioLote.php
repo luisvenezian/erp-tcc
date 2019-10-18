@@ -20,17 +20,17 @@ $this->load->view('header', $data);
                 <option value='-1'>Todos</option>
         </select>
 </div>
-<button type="button" onclick="exibir<?php echo $tipo ?>()" class="btn btn-primary">Consultar</button>
+<button type="button" onclick="exibir()" class="btn btn-primary">Consultar</button>
 
 <div id="resultado">
 
 </div>
 
 <script>
-        function exibirPeso() {
+        function exibir() {
                 idLote = $("#idLote").val();
                 $.ajax({
-                                url: '<?php echo base_url('relatorio/historicoPesagem'); ?>',
+                                url: '<?php echo base_url('relatorio/historicoLote'); ?>',
                                 crossDomain: true,
                                 type: 'POST',
                                 data: {

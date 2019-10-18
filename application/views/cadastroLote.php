@@ -44,7 +44,7 @@ if (isset($editar)) {
 </div>
 <div class="form-group">
         <label for="dieta">Dieta Atual</label>
-        <select class="browser-default custom-select" id="dieta" name="idProduto">
+        <select class="browser-default custom-select" id="dieta" name="idDieta">
                 <option selected>Escolha uma Dieta</option>
                 <?php
                 foreach ($dietas as $r) {

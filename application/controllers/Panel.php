@@ -7,6 +7,7 @@ class Panel extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('Panel_Model','bd');
+		$this->load->model('Executarsql_model','bde');
 	}
 
 	public function index()
@@ -17,7 +18,8 @@ class Panel extends CI_Controller {
 		else{	
 
 			$dados = array("alocacoes" => $this->bd->getDadosAlocacaoSuino(),
-						   "qtd" => $this->bd->getDadosSuinoDisponiveis());
+						   "qtd" => $this->bd->getDadosSuinoDisponiveis(),
+						   "suinos" => $this->bde->getHTMLTableBySQL("SELECT * FROM dbo.viewQtdRecriasPorMae"));
 			$this->load->view('panel', $dados);
 			
 		}

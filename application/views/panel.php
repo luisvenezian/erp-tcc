@@ -53,6 +53,11 @@ $qtdMachosDisponiveis = $qtd[0]->qtdMacho;
                         <div id="container2"></div>
                 </div>
         </div>
+
+        <div >
+        <table class="table">
+                        <?php echo $suinos?>
+        </div>
         
         <script>
         /*

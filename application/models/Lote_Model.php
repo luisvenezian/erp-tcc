@@ -278,4 +278,10 @@ class Lote_Model extends CI_Model
 		$query = $this->db->query($query);
 		return True;
 	}
+
+	public function consultaLoteRelatorio(){
+		$query = "SELECT * FROM viewTodosOsLotesNaoVendidos";
+		$query = $this->db->query($query);
+		return $query->result_array();
+	}
 }

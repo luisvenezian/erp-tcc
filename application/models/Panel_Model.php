@@ -22,6 +22,11 @@ class Panel_Model extends CI_Model {
 		$query = $this->db->query("SELECT * FROM dbo.viewEstoqueSuinosPivotada");
 		return $query->Result();
 	}
+
+	function recriaMae(){
+		$query = $this->db->query("SELECT * FROM dbo.viewQtdRecriasPorMae");
+		return $query->Result();
+	}
 	
 
 }

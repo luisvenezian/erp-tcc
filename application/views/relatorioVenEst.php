@@ -1,5 +1,5 @@
 <?php
-$data['controller'] = "lote";
+$data['controller'] = "Relatorio";
 $this->load->view('header', $data);
 ?>
 <script type='text/javascript' src="..\application\views\assets\js\executarsql.js"></script>
@@ -8,39 +8,58 @@ $this->load->view('header', $data);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.0.5/jspdf.plugin.autotable.js"></script>
 
-<h2>Tela de Relatórios</h2>
+<h2>Tela de Relatórios <?php ?></h2>
 <div class="form-group">
-        <label for="idLoteFull">Escolha o Lote</label>
-        <select class="browser-default custom-select" id="idLote" name="idLote">
-                <?php
-                foreach ($lote as $r) {
-                        $id = $r['idLote'];
-                        echo ("<option value='$id'>" . $r['nomeLote'] . "</option>");
-                } ?>
-                <option value='-1'>Todos</option>
-        </select>
+        <label for="dataInicio">Data Inicio</label>
+        <input type="date" id="dataInicio" name="dataInicio" class="form-control">
 </div>
-<button type="button" onclick="exibir<?php echo $tipo ?>()" class="btn btn-primary">Consultar</button>
+<div class="form-group">
+        <label for="dataFinal">Data Final</label>
+        <input type="date" id="dataFinal" name="dataFinal" class="form-control">
+</div>
+
+<button type="button" onclick='exibir<?php echo $tipo ?>()' class="btn btn-primary">Consultar</button>
 
 <div id="resultado">
 
 </div>
 
 <script>
-        function exibirPeso() {
-                idLote = $("#idLote").val();
+
+        function exibirVenda() {
+                dataInicio = $("#dataInicio").val();
+                dataFinal = $("#dataFinal").val();
                 $.ajax({
-                                url: '<?php echo base_url('relatorio/historicoPesagem'); ?>',
+                        url: '<?php echo base_url('relatorio/historicoVenda'); ?>',
                                 crossDomain: true,
                                 type: 'POST',
                                 data: {
-                                        idLote: idLote
+                                        dataInicio: dataInicio,
+                                        dataFinal: dataFinal
                                 }
                         })
                         .done(function(msg) {
                                 $("#resultado").html(msg);
                         });
         }
+
+        function exibirEstoque() {
+                dataInicio = $("#dataInicio").val();
+                dataFinal = $("#dataFinal").val();
+                $.ajax({
+                        url: '<?php echo base_url('relatorio/historicoEstoque'); ?>',
+                                crossDomain: true,
+                                type: 'POST',
+                                data: {
+                                        dataInicio: dataInicio,
+                                        dataFinal: dataFinal
+                                }
+                        })
+                        .done(function(msg) {
+                                $("#resultado").html(msg);
+                        });
+        }
+
 
         function csv() {
                 var table = new Tabulator("#id_table", {});

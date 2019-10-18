@@ -15,7 +15,6 @@ class ExecutarSql_Model extends CI_Model {
 	*/ 
 	function getHTMLTableBySQL($command_sql){
 		
-		
 		$query = $this->db->query($command_sql);
 
 		$num_rows = $query->num_rows();
@@ -53,12 +52,8 @@ class ExecutarSql_Model extends CI_Model {
 		}
 		else 
 		{
-			$table .= "<th scope='col'><b> ;( Nenhum registro encontrado no banco de dados para instrução: </b></th>";
+			$table .= "<th scope='col'><b> ;( Nenhum registro encontrado no banco de dados.</b></th>";
 			$table .= "</tr>\n"; 
-			$table .= "</tread>\n"; 
-			$table .= "<tbody>\n";
-			$table .= "<tr><td>".$command_sql."</td></tr>";
-			$table .= "</tbody>\n";
 			$table .= "</table>\n";
 		
 		}
